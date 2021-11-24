@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login Page</title>
+	<!--Made with love by Mutiullah Samim -->
+
+	<!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="d-flex justify-content-center h-100">
+			<div class="card">
+				<div class="card-header">
+					<p id="warning" class="warning"></p>
+					<h3>Teacher Sign Up</h3>
+				</div>
+				<div class="card-body">
+					<form id="teachersignup">
+						<div class="input-group form-group">
+							<input type="text" id="fullname" class="form-control" placeholder="Full Name">
+						</div>
+						<div class="input-group form-group">
+							<input type="text" id="username" class="form-control" placeholder="username@gmail.com">
+						</div>
+						<div class="input-group form-group">
+							<input type="password" id="password" class="form-control" placeholder="password">
+
+						</div>
+						<div class="input-group form-group">
+							<input type="password" id="cpassword" class="form-control" placeholder="confirm password">
+						</div>
+						<h6>Select Classes</h6>
+						<fieldset>
+							<div class="some-class">
+								<input type="checkbox" class="radio" name="a" value="a" id="a" />
+								<label for="z">1</label>
+								<input type="checkbox" class="radio" name="b" value="b" id="b" />
+								<label for="z">2</label>
+								<input type="checkbox" class="radio" name="c" value="c" id="c" />
+								<label for="z">3</label>
+								<input type="checkbox" class="radio" name="d" value="d" id="d" />
+								<label for="z">4</label>
+								<input type="checkbox" class="radio" name="e" value="e" id="e" />
+								<label for="z">5</label>
+							</div>
+						</fieldset>
+						<h6>Select Subjects Which you teach</h6>
+						<select class="form-control options" id="subjects">
+							<option value="Operating System">Operating System</option>
+							<option value="Computer Networks">Computer Networks</option>
+							<option value="DBMS">DBMS</option>
+							<option value="Compiler Design">Compiler Design</option>
+						</select>
+						<div class="form-group">
+							<button type="button" value="Signup" class="btn float-right login_btn"
+								onclick='call()'>Signup</button>
+						</div>
+					</form>
+				</div>
+				<div class="card-footer">
+					<div class="d-flex justify-content-center links">
+						Do you already have an account?<a href="/signin.html">Sign In</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="/js/teachersignup.js"></script>
+
+</html>

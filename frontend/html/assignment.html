@@ -1,0 +1,189 @@
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+---- Include the above in your HEAD tag -------- -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Page</title>
+    <!--Made with love by Mutiullah Samim -->
+
+    <!--Bootsrap 4 CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!--Custom styles-->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+    <ul>
+        <form action="http://127.0.0.1:5500/logout.html">
+            <input type="submit" class="logout" value="Logout" />
+        </form>
+    </ul>
+    <!-- <form  onsubmit='event.preventDefault(); call()' id="submitFile" name="submitFile">
+        <div>
+          <label for="file">Upload a new assignment(task) for students</label>
+          <input type="file" id="file" name="file" >
+        </div>
+        <div>
+          <button type="submit" >Submit</button>
+        </div>
+      </form> -->
+      <div class="uploaddiv">
+        <h1>Upload New Assignment</h1>
+        <form id='form'>
+            <div class="input-group">
+                <label for='name'>Your name</label>
+                <input name='name' id='name' placeholder="Enter your name" />
+            </div>
+            <div class="input-group">
+                <label for='files'>Select file(only pdf)</label>
+                <input id='files' type="file" multiple accept="application/pdf">
+            </div>
+            <button class="submit-btn" type='submit'>Upload</button>
+        </form>
+        <h1 >All Assignments</h1>
+        <div id="assignments" >
+
+        </div>
+    </div>
+
+      <!-- <h1 class="substyle" id="substyle">All Assignments</h1> -->
+      <script>
+    //       function call(){
+    //        const form=document.getElementById("submitFile")
+    //        console.log(form);
+    //   const data=new FormData();
+    //   data.append(form);
+    //     console.log(data)
+    //         fetch(`http://localhost:3000/signin/file`, 
+    //           {method: "POST", body: data}
+    // )
+    // }
+    sessionStorage.removeItem("assignment");
+    function call(data){
+      sessionStorage.setItem("assignment",data);
+    }
+    function updatevalid(id){
+      fetch(`http://localhost:3000/anotherfeature/updatevalid`, {
+         method: "POST",
+         body: JSON.stringify({
+        id
+        }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8",
+    'Accept': 'application/json'
+  }
+})
+  .then(response => {
+    return response.json()
+  })
+  .then(response => {
+    console.log(response)
+    alert("Ended submission")
+  })
+    }
+    const form = document.getElementById("form");
+
+form.addEventListener("submit", submitForm);
+
+function submitForm(e) {
+    e.preventDefault();
+    const name = document.getElementById("name");
+    const files = document.getElementById("files");
+    const formData = new FormData();
+    formData.append("name", name.value);
+        for(let i =0; i < files.files.length; i++) {
+            formData.append("files", files.files[i]);
+    }
+    fetch(`http://localhost:3000/feature/uploadassignment`, {
+        method: 'post',
+        body: formData,
+        headers: {
+    'Accept': 'application/json'
+  }
+    })
+    .then(response => {
+        return response.json()
+      })
+      .then(response => {
+        const filename=response.data.filename
+        const file=document.querySelector("#name").value;
+         console.log(filename)
+          fetch(`http://localhost:3000/anotherfeature/assignment`, {
+         method: "POST",
+         body: JSON.stringify({
+        token:sessionStorage.getItem("token"),
+        path:filename,
+        assignmentname:file,
+        sclass:sessionStorage.getItem("identity")
+        }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8",
+    'Accept': 'application/json'
+  }
+})
+  .then(response => {
+    return response.json()
+  })
+  .then(response => {
+      console.log(response)
+      fetch(`http://localhost:3000/image/${filename}`, {
+          })
+          .catch((err)=>console.log(err))
+  });
+        })
+      
+        // .catch((err) => ("Error occured", err));
+        alert("file uploaded")
+        window.location.href = "/assignment.html";
+}
+
+fetch(`http://localhost:3000/anotherfeature/fetchassignments`, {
+         method: "POST",
+         body: JSON.stringify({
+        token:sessionStorage.getItem("token"),
+        sclass:sessionStorage.getItem("identity")
+        }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8",
+    'Accept': 'application/json'
+  }
+})
+  .then(response => {
+    return response.json()
+  })
+  .then(response => {
+      const result=response.data;
+      let htmlCode=``;
+      for(let c=0;c<result.length;c++) {
+      htmlCode =
+        htmlCode +
+        
+        `
+                <div class="row subassi justify-content-center">
+                <h6 class="ml-0 mt-6">Name- ${result[c].assignmentname}</h6>
+                <a href="/viewsubmissions.html" onclick='call("${result[c].id}")' class="v">View Submissions</a>
+                <button type="button" onclick='updatevalid("${result[c].id}")' class="end">End submission<button>
+                </div>
+              `;
+    }
+
+    
+    const cards = document.querySelector("#assignments");
+    console.log(htmlCode)
+
+    cards.innerHTML = htmlCode;
+  })
+      </script>
+</body>
+
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login Page</title>
+	<!--Made with love by Mutiullah Samim -->
+
+	<!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+	<script>
+		if (sessionStorage.getItem("token")) {
+			console.log("hey")
+			window.location.href = "/logout.html";
+		}
+	</script>
+	<div class="container">
+		<div class="d-flex justify-content-center h-100">
+			<div class="card2">
+				<div class="card-header">
+					<p id="warning" class="warning"></p>
+					<h3>Sign In</h3>
+					<!-- <div class="d-flex justify-content-end social_icon">
+						<span><i class="fab fa-facebook-square"></i></span>
+						<span><i class="fab fa-google-plus-square"></i></span>
+						<span><i class="fab fa-twitter-square"></i></span>
+					</div> -->
+				</div>
+				<div class="card-body">
+					<form id="signin">
+						<select class="input-options" id="role">
+							<option value="student">Student</option>
+							<option value="teacher">Teacher</option>
+							<option value="admin">Admin</option>
+						</select>
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" class="form-control" id="username" placeholder="username@gmail.com">
+
+						</div>
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+							</div>
+							<input type="password" class="form-control" id="password" placeholder="password">
+						</div>
+						<div class="form-group">
+							<button type="button" value="Signin" class="btn float-right login_btn"
+								onclick="callsignin()">Signin</button>
+						</div>
+					</form>
+				</div>
+				<div class="card-footer">
+					<div class="d-flex justify-content-center links account">
+						Don't have an account?<a href="/signupfront.html">Sign Up</a>
+					</div> <br>
+          <div class="d-flex justify-content-center links account">
+						<a href="/username.html">Verify Account</a>
+					</div> <br>
+					<!-- <div class="d-flex justify-content-center">
+						<a href="#">Forgot your password?</a>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script >
+	function callsignin() {
+  const role = document.querySelector('#role').value;
+  const username = document.querySelector('#username').value;
+  const password = document.querySelector('#password').value;
+  if(!/@gmail\.com$/.test(username)){
+	document.getElementById("warning").innerHTML = "Enter valid gmail id"
+    return
+  }
+  if (!username || !password) {
+    document.getElementById("warning").innerHTML = "Fill all the credentials properly"
+    return
+  }
+  console.log(role)
+  if (role == "student") {
+    data = fetch(`http://localhost:3000/signin/student`, {
+      method: "POST",
+      body: JSON.stringify({
+        username,
+        password
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        'Accept': 'application/json'
+      }
+    })
+      .then(response => {
+        return response.json()
+      })
+      .then(response => {
+        console.log(response)
+        if (response.status == false) {
+          document.getElementById("warning").innerHTML = `${response.mssg}`;
+          return
+        }
+        else {
+          sessionStorage.setItem('token', response.mssg)
+          sessionStorage.setItem('data', response.data);
+          console.log(response.data);
+          // updatestudenthome(response.subjects);
+          window.location.href = "/home.html";
+        }
+      });
+  }
+  else if(role=="teacher") {
+    data = fetch(`http://localhost:3000/signin/teacher`, {
+      method: "POST",
+      body: JSON.stringify({
+        username,
+        password
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        'Accept': 'application/json'
+      }
+    })
+      .then(response => {
+        return response.json()
+      })
+      .then(response => {
+        if (response.status == false) {
+          document.getElementById("warning").innerHTML = `${response.mssg}`;
+          return
+        }
+        else {
+          sessionStorage.setItem('token', response.mssg)
+          sessionStorage.setItem('data', response.data);
+          console.log("hey")
+          console.log(sessionStorage.getItem("data"))
+          // updatestudenthome(response.subjects);
+          window.location.href = "/home.html";
+        }
+      });
+  }
+  else{
+	data = fetch(`http://localhost:3000/signin/admin`, {
+      method: "POST",
+      body: JSON.stringify({
+        username,
+        password
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        'Accept': 'application/json'
+      }
+    })
+      .then(response => {
+        return response.json()
+      })
+      .then(response => {
+		  console.log(response)
+        if (response.status == false) {
+          document.getElementById("warning").innerHTML = `${response.message}`;
+          return
+        }
+        else {
+          // updatestudenthome(response.subjects);
+          window.location.href = "/dashboard.html";
+        }
+      });
+  }
+}
+document.querySelector('#signin').addEventListener('keypress', function (event) {
+  if (event.keyCode === 13 || event.which === 13) {
+    callsignin();
+  }
+});
+</script>
+
+</html>

@@ -1,0 +1,123 @@
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+---- Include the above in your HEAD tag -------- -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Quiz Page</title>
+    <!--Made with love by Mutiullah Samim -->
+
+    <!--Bootsrap 4 CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!--Custom styles-->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+    <ul>
+        <form action="/logout.html">
+            <input type="submit" class="logout" value="Logout" />
+        </form>
+    </ul>
+    <h1 id="hometext" class="ann">All Pending Assignments</h1>
+  <div class="row justify-content-center" id="data">
+  </div>
+  <h1 id="hometext" class="anno">Submitted Assignments</h1>
+  <div class="row justify-content-center" id="submitassignment">
+  </div>
+    <script>
+         sessionStorage.removeItem("assignment");
+        function call(data){
+            sessionStorage.setItem("assignment",data);
+        }
+        const token=sessionStorage.getItem("token");
+        const subject=sessionStorage.getItem("identity")
+        fetch(`http://localhost:3000/anotherfeature/studentassignment`, {
+  method: "POST",
+  body: JSON.stringify({
+    token,
+    subject
+  }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8",
+    'Accept': 'application/json'
+  }
+})
+  .then(response => {
+    return response.json()
+  })
+  .then(response => {
+      console.log(response);
+      const result=response.data;
+      let htmlCode=``;
+      for(let c=0;c<result.length;c++) {
+      htmlCode =
+        htmlCode +
+        
+        `
+                <div class="row subm justify-content-center mt-6">
+                <h6 class="apath">Name- ${result[c].assignmentname}</h6>
+                <a href="/submitassignment.html" onclick='call("${result[c].id}")' class="apath">Submit Assignment</a>
+                </div>
+              `;
+    }
+
+    
+    const cards = document.querySelector("#data");
+    console.log(htmlCode)
+
+    cards.innerHTML = htmlCode;
+  });
+
+  fetch(`http://localhost:3000/anotherfeature/studentsubmittedassignment`, {
+  method: "POST",
+  body: JSON.stringify({
+    token,
+    subject
+  }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8",
+    'Accept': 'application/json'
+  }
+})
+  .then(response => {
+    return response.json()
+  })
+  .then(response => {
+    console.log(response)
+      const result=response.data;
+      let htmlcode=``;
+      for(let c=0;c<result.length;c++) {
+      htmlcode =
+        htmlcode +
+        
+        `
+                <div class="row subm justify-content-center mt-6">
+                  <h6 class="apath">Name- ${result[c].assignmentname}</h6>
+                <a href="${result[c].assignmentpath}" class="apath">Submitted Assignment</a>
+                <a href="${result[c].filepath}" class="apath">Assignment</a>
+                <h6 class="apath">Marks- ${result[c].marks}</h6>
+                </div>
+              `;
+    }
+
+    
+    const cards = document.querySelector("#submitassignment");
+    console.log(htmlcode)
+
+    cards.innerHTML = htmlcode;
+  });
+    </script>
+    
+</body>
+
+</html>

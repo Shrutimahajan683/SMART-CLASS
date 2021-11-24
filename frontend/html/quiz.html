@@ -1,0 +1,70 @@
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+---- Include the above in your HEAD tag -------- -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Quiz Page</title>
+    <!--Made with love by Mutiullah Samim -->
+
+    <!--Bootsrap 4 CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!--Custom styles-->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+    <script>
+        sessionStorage.removeItem("count");
+        sessionStorage.removeItem("nquiz");
+        function call(){
+            let count=document.querySelector("#count").value;
+            let qname=document.querySelector("#nquiz").value;
+            if(count>100)
+            {alert("Enter no of questions less than or equal to 100");
+            return;
+            }
+            if(count<1)
+            {alert("Enter atleast 1 in no of questions");
+            return;
+            }
+            sessionStorage.setItem("count",count);
+            sessionStorage.setItem("nquiz",qname);
+            window.location.href = "/createquiz.html";
+        }
+    </script>
+    <ul>
+        <form action="/logout.html">
+            <input type="submit" class="logout" value="Logout" />
+        </form>
+    </ul>
+    <div class="row justify-content-center thumbnailImage">
+        <div class="card1 " style="width: 18rem;">
+            <h3 class="request thumbnailImage">Want to create quiz?</h3>
+            <div class="card-body">
+                <label for="count" class="count">count of questions:</label>
+                <input type="number" id="count" class="icount" name="count">
+                        <label for="quiz" class="count">Enter quiz name:</label>
+                        <input type="text" id="nquiz" name="Quiz-1" class="icount">   
+                <button type="button" class="cbutton" onclick="call()">Submit</button>
+            </div>
+        </div>
+        <!-- <div class="card1" style="width: 18rem;">
+            <img class="card-img-top img-fluid" src="/img/back.png" alt="">
+            <div class="card-body">
+                <a href="http://127.0.0.1:5500/studentsignup.html" class="role_btn">Student</a>
+            </div>
+        </div> -->
+    </div>
+</body>
+
+</html>

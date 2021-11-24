@@ -1,0 +1,142 @@
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+---- Include the above in your HEAD tag -------- -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Home Page</title>
+  <!--Made with love by Mutiullah Samim -->
+
+  <!--Bootsrap 4 CDN-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <!--Fontawesome CDN-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+  <!--Custom styles-->
+  <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+  <ul>
+    <form action="/logout.html">
+      <input type="submit" class="logout" value="Logout" />
+    </form>
+  </ul>
+  <h1 id="hometext" class="hometext"></h1>
+  <div class="row justify-content-center" id="data">
+  </div>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+
+  <script>
+     const count=Number(sessionStorage.getItem("count"))
+    const quizname = sessionStorage.getItem("nquiz");
+
+    let htmlCode = ``;
+    document.querySelector("#hometext").innerHTML=quizname
+    let obj={};
+    function call(data) {
+         for(let c=1;c<=count;c++){
+             inobj={}
+             console.log("#i"+c);
+             inobj.ques=document.querySelector("#i"+c).value;
+             inobj.o1=document.querySelector("#o1"+c).value;
+             inobj.o2=document.querySelector("#o2"+c).value;
+             inobj.o3=document.querySelector("#o3"+c).value;
+             inobj.o4=document.querySelector("#o4"+c).value;
+             inobj.r=document.querySelector("#r"+c).value;
+             obj[c]=inobj;
+        }
+        fetch(`http://localhost:3000/signin/createquiz`, {
+      method: "POST",
+      body: JSON.stringify({
+        token:sessionStorage.getItem("token"),
+        obj,
+        count:count,
+        quizname:quizname,
+        sclass:sessionStorage.getItem("identity")
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        'Accept': 'application/json'
+      }
+    })
+      .then(response => {
+        return response.json()
+      })
+      .then(response => {
+        console.log(response)
+      });
+       window.location.href = "/quiz.html";
+    }
+
+    // to get each single elephant object from the array and use them to build out html string, we need to open up our array, and we do that using forEach method. The forEach method, finds each item(object) in the array and returns them, this means we get 4 items that are objects back.
+
+    for(let c=1;c<=count;c++) {
+      // uncomment the line below, to see each of the 4 objects rendered in the console.
+      //console.log(singleElephantObjects);
+      let input="i"+c;
+      let op1="o1"+c;
+      let op2="o2"+c;
+      let op3="o3"+c;
+      let op4="o4"+c;
+      let ri="r"+c;
+
+      // we take our previous empty htmlCode variable and add our html codes to it.
+
+      // because the forEach method returns objects, we can then use the dot notation to reference children of the object, e.g, elephant.title;
+      htmlCode =
+        htmlCode +
+        `
+        <div  class="quiz">
+            <h6>Enter question with options<h6>
+            <h6>Q${c}: </h6>
+            <input type="text" class="ques" id="${input}">
+            <div class="row">
+            <h6 class="mt-3">1 : </h6> 
+            <input type="text" class="option" id="${op1}">
+            </div>
+            <div class="row">
+            <h6 class="mt-3">2: </h6> 
+            <input type="text" class="option" id="${op2}">
+            </div>
+            <div class="row">
+            <h6 class="mt-3">3: </h6> 
+            <input type="text" class="option" id="${op3}">
+            </div>
+            <div class="row">
+            <h6 class="mt-3">4: </h6> 
+            <input type="text" class="option" id="${op4}">
+            </div>
+            <h6 class="mt-3">Enter correct option: </h6>
+            <input type="number" class="option" placeholder="1" id="${ri}">
+        </div>
+  `;
+      // uncomment the line below to see the output in the browser console.
+      // console.log(htmlCode);
+    }
+    htmlCode =htmlCode+
+        `
+        <button type="Submit" class="qsubmit" onclick='call()'>Submit</button>
+  `;
+    // currently, we have out html code showing in the browser console, we need to send it to our html file and render it there.
+    // here we define out the cards we want to be rendered to the DOM.
+
+    // ".all-elephant-cards" is the class of the empty div back in our index.html. We want to render the cards from our JS inside that div.
+    // we are simply saying, "let elephantCards be = to that div", to target that div, we reference the class we gave to it.
+    const cards = document.querySelector("#data");
+    console.log(htmlCode)
+
+    // here's how we do the render;
+    // since elephantCards is now = to that div, we now say let the inside of that div take in our htmlCode variable that holds our html codes.
+    cards.innerHTML = htmlCode;
+  </script>
+
+</body>
+
+</html>

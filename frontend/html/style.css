@@ -1,0 +1,533 @@
+/* Made with love by Mutiullah Samim*/
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+
+html,body{
+  /* background: rgb(238,174,202);
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+background-size: cover;
+background-repeat: no-repeat; */
+background:radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+height: 100%;
+font-family: 'Numans', sans-serif;
+}
+
+.container{
+height: 100%;
+align-content: center;
+}
+
+.thumbnailImage {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.logout{
+  background-color: rgba(128, 0, 0, 0.452);
+}
+
+ul {
+  list-style-type: none;
+  margin-left: 1250px;
+  padding: 0;
+}
+
+.options{
+  margin-bottom:15px;
+}
+
+.card1{
+height: 300px;
+margin-top: 40px;
+margin-left: 50px;
+width: 300px;
+background-color: rgba(0,0,0,0.5) !important;
+border-radius: 50px;
+}
+
+.ucard{
+height: 400px;
+margin-top: 40px;
+margin-left: 50px;
+width: 300px;
+background-color: rgba(0,0,0,0.5) !important;
+border-radius: 50px;
+}
+
+.substyle{
+    margin-left:550px;
+    margin-top:50px;
+    color: rgba(128, 0, 0, 0.452);
+}
+.subjects{
+    margin-left:40px;
+    color: rgba(128, 0, 0, 0.452);
+}
+
+.bsub{
+  display: flex;
+  flex-direction: column;
+}
+
+.hometext{
+  margin-left: 600px;
+  color: rgba(128, 0, 0, 0.452);
+}
+
+.sub{
+    margin-left:80px;
+    margin-top: 20px;
+    margin-right:80px;
+}
+
+.subm{
+  margin-left:180px;
+    margin-top: 20px;
+    margin-right:80px;
+    background-color: rgba(128, 0, 0, 0.452);
+}
+
+.apath{
+  margin-top: 5px;
+  margin-right: 60px;
+}
+
+
+.timePicker{
+ margin-left:60px;
+}
+
+.cbutton{
+margin-left: 80px;
+margin-top: 20px;
+}
+
+.request{
+  margin-left: 20px;
+  font-size: 20px;
+  margin-top:5px;
+  margin-right:5px;
+  color: rgba(128, 0, 0, 0.452);
+}
+
+.otp{
+  font-size: 20px;
+  color: rgba(128, 0, 0, 0.452);
+  margin-left: 70px;
+}
+
+.iotp{
+  margin-left: 20px;
+}
+
+.marks{
+  width: 100px;
+  height: 30px;
+  margin-top: 3px;
+}
+
+.fname{
+  color: rgba(128, 0, 0, 0.452);
+  margin-top: 10px;
+}
+
+.rollno{
+  color: rgba(128, 0, 0, 0.452);
+  margin-top: 100px;
+  padding-top: 3px;
+  margin-right: 30px;
+}
+
+.lmarks{
+  color: rgba(128, 0, 0, 0.452);
+  margin-top: 5px;
+}
+
+.assi{
+  margin-top: 5px;
+  margin-right: 30px;
+}
+
+.abutton{
+  height:30px;
+  margin-top: 3px;
+}
+
+.viewquiz{
+  margin-bottom: 40px;
+  background-color: rgba(128, 0, 0, 0.452);
+  width: 1200px;
+}
+
+.sub{
+  background-color: rgba(128, 0, 0, 0.452);
+}
+
+.subassi{
+  height: 40px;
+  background-color: rgba(128, 0, 0, 0.452);
+  margin-top: 50px;
+  margin-right: 600px;
+  width: 600px;
+}
+
+.end{
+  height: 30px;
+  margin-left: 30px;
+}
+
+.v{
+  margin-left: 30px;
+}
+
+.utext{
+  color: rgba(128, 0, 0, 0.452);
+  font-size: 15px;
+}
+
+.date{
+  margin-left:30px ;
+}
+
+
+.request1{
+  color: rgba(128, 0, 0, 0.452);
+  font-size: 20px;
+  margin-left: 80px;
+}
+
+.card2{
+    height: 380px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0,0,0,0.5) !important;
+}
+    
+.rcap{
+ margin-left:400px;
+}
+
+.card{
+height: 570px;
+margin-top: auto;
+margin-bottom: auto;
+width: 400px;
+background-color: rgba(0,0,0,0.5) !important;
+}
+
+.books{
+  margin-left: 40px;
+  border-radius: 30%;
+  background-color: whitesmoke;
+}
+
+.logout{
+  margin-left: 40px;
+  margin-right: 30px;
+}
+
+.goback{
+  background-color: rgba(128, 0, 0, 0.452);
+}
+.social_icon span{
+font-size: 60px;
+margin-left: 10px;
+color: rgba(128, 0, 0, 0.452);
+}
+
+.rin{
+  width: 50px;
+  margin-right: 50px;
+}
+
+.racc{
+margin-right:50px ;
+}
+
+.rcount{
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.rdate{
+  margin-right: 50px;
+}
+
+.con{
+  background-color: rgba(128, 0, 0, 0.452);
+  margin-top: 20px;
+  margin-left:50px;
+  
+}
+
+.assiassi{
+  margin-left: 200px;
+  background-color: rgba(128, 0, 0, 0.452);
+  margin-right: 200px;
+  height: 50px;
+}
+.assicontainer{
+  margin-top: 150px;
+  margin-left: 550px;
+}
+
+.anno{
+  margin-top: 100px;
+  margin-left: 500px;
+  color:rgba(128, 0, 0, 0.452) ;
+}
+
+.ann{
+  margin-left: 500px;
+  color:rgba(128, 0, 0, 0.452) ;
+}
+
+.uploaddiv{
+  margin-left: 550px;
+  margin-top: 50px;
+}
+
+.empty{
+  margin-left: 550px;
+}
+
+.social_icon span:hover{
+color: white;
+cursor: pointer;
+}
+
+.card-header h3{
+color: white;
+}
+
+.social_icon{
+position: absolute;
+right: 20px;
+top: -45px;
+}
+
+
+.input-options{
+    margin-left:130px;
+     padding: 5px;
+     margin-bottom: 10px;
+     margin-top:0;
+    /*width: 30px; */
+}
+
+.input-group-prepend span{
+width: 50px;
+background-color: rgba(128, 0, 0, 0.452);
+color: black;
+border:0 !important;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+
+}
+
+.remember{
+color: white;
+}
+
+.remember input
+{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+margin-right: 5px;
+}
+
+.warning{
+    color: red;
+    margin-left: 70px;
+}
+
+.role_btn{
+color: white;
+padding: 5px 10px 5px 10px;
+border-radius: 100px;
+background-color: rgba(128, 0, 0, 0.212);
+width: 200px;
+margin-left: 90px;
+height:100px;
+}
+
+.requests{
+  color: white;
+padding: 5px 10px 5px 10px;
+border-radius: 100px;
+background-color: rgba(128, 0, 0, 0.212);
+width: 200px;
+margin-left: 60px;
+height:100px;
+}
+
+.file{
+  margin-left: 300px;
+  margin-top: 100px;
+  margin-right: 200px;
+  background-color: rgba(128, 0, 0, 0.212);
+}
+
+.finput{
+  margin-top: 20px;
+}
+
+.qsubmit{
+  margin-left: 200px;
+}
+
+.login_btn{
+color: white;
+font-size: 14px;
+font-weight: 200;
+background-color: rgba(128, 0, 0, 0.452);
+border: solid white 1px;
+border-radius:154px;
+width: 100px;
+}
+
+.login_btn:hover{
+color: black;
+background-color: white;
+}
+
+.links{
+color: white;
+}
+
+.links a{
+margin-left: 4px;
+}
+fieldset {
+    overflow: hidden
+  }
+  
+  .some-class {
+    float: left;
+    clear: none;
+  }
+  
+  label {
+    float: left;
+    clear: none;
+    display: block;
+    padding: 0px 1em 0px 8px;
+  }
+  
+  input[type=radio],
+  input.radio {
+    float: left;
+    clear: none;
+    margin: 2px 0 0 2px;
+  }
+
+  .account {
+    font-size: 15px;
+    margin-top: 10px;
+  }
+
+  .uinput{
+    width: 200px;
+    margin-left:20px ;
+  }
+
+  .count{
+    margin-left: 5px;
+    font-size: 20px;
+    margin-top:5px;
+    margin-right:5px;
+    color: rgba(128, 0, 0, 0.452);
+  }
+
+  .icount{
+    margin-left:15px;
+  }
+
+  .ques{
+    width: 1200px;
+    height: 100px;
+  }
+
+  .option{
+    width: 1200px;
+    height:40px;
+    display:block;
+    margin-top: 8px;
+  }
+ 
+  .takeoption{
+    display: block;
+  }
+
+  .quiz{
+    margin-top: 50px;
+  }
+
+  .takequiz{
+    width: 800px;
+    margin-right: 350px;
+    margin-top: 30px;
+    background-color: rgba(128, 0, 0, 0.452);
+  }
+
+  .rtake{
+    background-color: rgba(128, 0, 0, 0.452);
+    display:block;
+    margin-right: 350px;
+  }
+
+.username{
+  margin-left: 40px;
+  margin-top: 6px;
+}
+.rollno{
+  margin-left: 40px;
+  margin-top: 6px;
+}
+.sclass{
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 6px;
+}
+
+.s{
+  margin-left: 350px;
+  color:rgba(128, 0, 0, 0.452);
+}
+
+.t{
+  margin-left: 350px;
+  margin-top: 100px;
+  color:rgba(128, 0, 0, 0.452);
+}
+
+.name{
+  margin-top: 6px;
+}
+
+.subject{
+  margin-left: 40px;
+  margin-top:6px;
+}
+
+.classlist{
+  margin-left: 40px;
+  margin-top:6px;
+  margin-right: 40px;
+}
+
+.stext{
+    color:rgba(128, 0, 0, 0.452);
+    margin-left: 150px;
+    font-size: 50px;
+}
+  .sc{
+    margin-right: 300px;
+  }
