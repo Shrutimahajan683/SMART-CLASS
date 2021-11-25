@@ -37,7 +37,7 @@
           <button type="submit" >Submit</button>
         </div>
       </form> -->
-      <div class="uploaddiv">
+      <div class="uploaddiv justify-content-center">
         <h1>Upload New Assignment</h1>
         <form id='form'>
             <div class="input-group">
@@ -50,8 +50,8 @@
             </div>
             <button class="submit-btn" type='submit'>Upload</button>
         </form>
-        <h1 >All Assignments</h1>
-        <div id="assignments" >
+        <h1 id="all" class="All" >All Assignments</h1>
+        <div id="assignments" class="justify-content-center">
 
         </div>
     </div>
@@ -164,15 +164,30 @@ fetch(`http://localhost:3000/anotherfeature/fetchassignments`, {
   .then(response => {
       const result=response.data;
       let htmlCode=``;
+      console.log(response);
+      if(result.length==0)
+        {
+          document.querySelector("#all").innerHTML="NO ASSIGNMENT"
+             let  htmlCode =
+        `
+        <div class="card1" style="width: 18rem;">
+            <img class="card-img-top img-fluid thumbnailImage" src="/img/empty.png" alt="">
+        </div>
+  `;
+  const container=document.querySelector("#assignments")
+            container.innerHTML=htmlCode;
+            }
+
+    else{
       for(let c=0;c<result.length;c++) {
       htmlCode =
         htmlCode +
         
         `
-                <div class="row subassi justify-content-center">
+                <div class="row subassi">
                 <h6 class="ml-0 mt-6">Name- ${result[c].assignmentname}</h6>
                 <a href="/viewsubmissions.html" onclick='call("${result[c].id}")' class="v">View Submissions</a>
-                <button type="button" onclick='updatevalid("${result[c].id}")' class="end">End submission<button>
+                <button type="button" onclick='updatevalid("${result[c].id}")' class="end">End submission</button>
                 </div>
               `;
     }
@@ -182,6 +197,7 @@ fetch(`http://localhost:3000/anotherfeature/fetchassignments`, {
     console.log(htmlCode)
 
     cards.innerHTML = htmlCode;
+  }
   })
       </script>
 </body>

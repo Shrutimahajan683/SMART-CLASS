@@ -28,10 +28,10 @@
             <input type="submit" class="logout" value="Logout" />
         </form>
     </ul>
-    <h1 id="hometext" class="ann">All Pending Assignments</h1>
+    <h1 id="hometext1" class="ann">All Pending Assignments</h1>
   <div class="row justify-content-center" id="data">
   </div>
-  <h1 id="hometext" class="anno">Submitted Assignments</h1>
+  <h1 id="hometext2" class="anno">Submitted Assignments</h1>
   <div class="row justify-content-center" id="submitassignment">
   </div>
     <script>
@@ -59,6 +59,19 @@
       console.log(response);
       const result=response.data;
       let htmlCode=``;
+      if(result.length==0)
+            {
+              document.querySelector("#hometext1").innerHTML="NO PENDING ASSIGNMENT"
+             let  htmlCode =
+        `
+        <div class="card1" style="width: 18rem;">
+            <img class="card-img-top img-fluid thumbnailImage" src="/img/empty.png" alt="">
+        </div>
+  `;
+  const container=document.querySelector("#data")
+            container.innerHTML=htmlCode;
+            }
+      else{
       for(let c=0;c<result.length;c++) {
       htmlCode =
         htmlCode +
@@ -76,6 +89,7 @@
     console.log(htmlCode)
 
     cards.innerHTML = htmlCode;
+  }
   });
 
   fetch(`http://localhost:3000/anotherfeature/studentsubmittedassignment`, {
@@ -96,6 +110,19 @@
     console.log(response)
       const result=response.data;
       let htmlcode=``;
+      if(result.length==0)
+            {
+              document.querySelector("#hometext2").innerHTML="NO ASSIGNMENT"
+             let  htmlCode =
+        `
+        <div class="card1" style="width: 18rem;">
+            <img class="card-img-top img-fluid thumbnailImage" src="/img/empty.png" alt="">
+        </div>
+  `;
+  const container=document.querySelector("#submitassignment")
+            container.innerHTML=htmlCode;
+            }
+      else{
       for(let c=0;c<result.length;c++) {
       htmlcode =
         htmlcode +
@@ -115,6 +142,7 @@
     console.log(htmlcode)
 
     cards.innerHTML = htmlcode;
+  }
   });
     </script>
     

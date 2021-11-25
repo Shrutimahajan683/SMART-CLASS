@@ -18,6 +18,16 @@ height: 100%;
 align-content: center;
 }
 
+.bottom {
+  display: flex;
+  font-size: 12px;
+}
+
+.create{
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
 .thumbnailImage {
   cursor: pointer;
   padding: 10px;
@@ -109,7 +119,7 @@ margin-top: 20px;
   font-size: 20px;
   margin-top:5px;
   margin-right:5px;
-  color: rgba(128, 0, 0, 0.452);
+  color: white;
 }
 
 .otp{
@@ -169,8 +179,9 @@ margin-top: 20px;
   height: 40px;
   background-color: rgba(128, 0, 0, 0.452);
   margin-top: 50px;
-  margin-right: 600px;
+  padding-top: 5px;
   width: 600px;
+  padding-left:50px ;
 }
 
 .end{
@@ -263,6 +274,66 @@ margin-right:50px ;
   
 }
 
+.topic{
+  background-color: rgba(128, 0, 0, 0.452);
+  margin-left: 300px;
+  margin-right: 300px;
+}
+
+
+
+.ttitle{
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+.posts{
+  margin-bottom: 20px;
+  background-color: rgba(128, 0, 0, 0.452);
+  margin-left: 300px;
+  margin-right: 300px;
+}
+
+.ititle{
+  width: 700px;
+  height: 50px;
+  margin-left: 40px;
+}
+
+.tdesc{
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+.idesc{
+  width: 700px;
+  margin-left: 40px;
+  height: 100px;
+}
+
+.tsubmit{
+  margin-top: 10px;
+  margin-left: 600px;
+}
+
+.add{
+  color:rgba(128, 0, 0, 0.452) ;
+  margin-left: 500px;
+}
+
+.top{
+  color:rgba(128, 0, 0, 0.452) ;
+  margin-left: 600px;
+  margin-top: 50px;
+}
+
+.dis{
+  margin-left: 400px;
+  margin-bottom: 50px;
+  margin-right: 400px;
+  background-color: rgba(128, 0, 0, 0.452);
+}
+
 .assiassi{
   margin-left: 200px;
   background-color: rgba(128, 0, 0, 0.452);
@@ -272,6 +343,37 @@ margin-right:50px ;
 .assicontainer{
   margin-top: 150px;
   margin-left: 550px;
+}
+
+.createpost{
+  margin-left: 450px;
+}
+
+.descpost{
+  padding-bottom: 20px;
+  margin-left: 20px;
+}
+
+.pt{
+  margin-left: 500px;
+  margin-bottom: 40px;
+}
+
+.reply{
+  margin-left: 680px;
+  /* margin-bottom: 20px; */
+}
+
+.parentpost{
+  background-color: rgb(212, 202, 187);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.rep{
+margin-right: 500px;
+background-color: rgb(184, 172, 172);
+height: 20px;
 }
 
 .anno{
@@ -286,12 +388,13 @@ margin-right:50px ;
 }
 
 .uploaddiv{
-  margin-left: 550px;
+  margin-left: 500px;
   margin-top: 50px;
 }
 
-.empty{
-  margin-left: 550px;
+.All{
+  margin-top: 90px;
+  margin-left: 100px;
 }
 
 .social_icon span:hover{
@@ -329,6 +432,10 @@ input:focus{
 outline: 0 0 0 0  !important;
 box-shadow: 0 0 0 0 !important;
 
+}
+
+.empty{
+  margin-left: 550px;;
 }
 
 .remember{
@@ -443,7 +550,7 @@ fieldset {
     font-size: 20px;
     margin-top:5px;
     margin-right:5px;
-    color: rgba(128, 0, 0, 0.452);
+    color: white;
   }
 
   .icount{

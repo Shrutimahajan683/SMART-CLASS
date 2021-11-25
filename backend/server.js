@@ -15,9 +15,11 @@ const signupRouter=require('./router/signup')
 const signinRouter=require('./router/signin')
 const otpRouter=require('./router/otp')
 const featureRouter=require('./router/feature')
+const discussionRouter=require('./router/discussion')
 app.use('/signup',signupRouter)
 app.use('/signin',signinRouter)
 app.use('/otp',otpRouter)
+app.use('/discussion',discussionRouter)
 const path =require('path')
 
 const storage = multer.diskStorage({

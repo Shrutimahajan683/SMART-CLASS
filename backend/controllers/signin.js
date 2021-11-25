@@ -44,7 +44,7 @@ exports.student = async (req, res) => {
                     "subject"
                 );
                 console.log(first_check_result)
-                res.send({ status: true, mssg: `${token}`, data: `${result}` })
+                res.send({ status: true, mssg: `${token}`, data: `${result}`,role:"student" })
             }
         }
         else {
@@ -79,7 +79,7 @@ exports.teacher = async (req, res) => {
                     getResult.rows,
                     "classes"
                 );
-                res.send({ status: true, mssg: `${token}`, data: `${result}` })
+                res.send({ status: true, mssg: `${token}`, data: `${result}` ,role:"teacher"})
             }
         }
         else {

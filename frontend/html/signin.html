@@ -115,7 +115,7 @@
         else {
           sessionStorage.setItem('token', response.mssg)
           sessionStorage.setItem('data', response.data);
-          console.log(response.data);
+          sessionStorage.setItem('role',response.role)
           // updatestudenthome(response.subjects);
           window.location.href = "/home.html";
         }
@@ -144,8 +144,8 @@
         else {
           sessionStorage.setItem('token', response.mssg)
           sessionStorage.setItem('data', response.data);
-          console.log("hey")
           console.log(sessionStorage.getItem("data"))
+          sessionStorage.setItem('role',response.role)
           // updatestudenthome(response.subjects);
           window.location.href = "/home.html";
         }

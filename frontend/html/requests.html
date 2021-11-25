@@ -103,11 +103,11 @@ function decline(time,date){
         .then(response => {
           if(response.Status==true)
           {
-            document.querySelector("#substyle").innerHTML="NO REQUESTS"
             let htmlCode = ``;
             const requests=response.data;
             if(requests.length==0)
             {
+              document.querySelector("#substyle").innerHTML="NO REQUESTS"
              let  htmlCode =
         `
         <div class="card1 empty" style="width: 18rem;">

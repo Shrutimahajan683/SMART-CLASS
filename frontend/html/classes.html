@@ -33,6 +33,9 @@
         function quizcall(){
             window.location.href = "/quiz.html";
         }
+        function discussion(){
+            window.location.href = "/discussion.html";
+        }
     </script>
     <ul>
         <form action="/logout.html">
@@ -58,6 +61,12 @@
             <img class="card-img-top img-fluid thumbnailImage" onclick='quizcall()' src="/img/student.png" alt="">
             <div class="card-body">
                 <a href="/quiz.html" class="role_btn">Quiz</a>
+            </div>
+        </div>
+        <div class="card1" style="width: 18rem;">
+            <img class="card-img-top img-fluid thumbnailImage" onclick='discussion()' src="/img/discussion.png" alt="">
+            <div class="card-body">
+                <button type="button" class="cbutton" onclick="discussion()" >Discussion</button>
             </div>
         </div>
     </div>

@@ -30,6 +30,9 @@
         function view(){
             window.location.href = "/studentassignment.html";
         }
+        function discussion(){
+            window.location.href = "/discussion.html";
+        }
     </script>
     <ul>
         <form action="/logout.html">
@@ -60,6 +63,12 @@
             <img class="card-img-top img-fluid thumbnailImage" onclick='view()' src="/img/classes.png" alt="">
             <div class="card-body">
                 <button type="button" class="cbutton" onclick="view()" >Assignments</button>
+            </div>
+        </div>
+        <div class="card1" style="width: 18rem;">
+            <img class="card-img-top img-fluid thumbnailImage" onclick='discussion()' src="/img/discussion.png" alt="">
+            <div class="card-body">
+                <button type="button" class="cbutton" onclick="discussion()" >Discussion</button>
             </div>
         </div>
     </div>

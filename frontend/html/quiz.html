@@ -29,6 +29,11 @@
         function call(){
             let count=document.querySelector("#count").value;
             let qname=document.querySelector("#nquiz").value;
+            if(!qname)
+            {
+                alert("Enter quiz name");
+                return;
+            }
             if(count>100)
             {alert("Enter no of questions less than or equal to 100");
             return;
