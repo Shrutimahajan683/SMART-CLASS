@@ -22,13 +22,13 @@ console.log(username)
 const otp = Math.floor(100000 + Math.random() * 900000);
 const ttl = 2 * 60 * 1000;
 const expires = Date.now() + ttl;
-const data = `${otp}.${expires}`;
+const data = `${username}.${otp}.${expires}`;
 const hash = crypto.createHmac('sha256', smsKey).update(data).digest('hex');
 const fullHash = `${hash}.${expires}`;
-sgMail.setApiKey('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');
+sgMail.setApiKey('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');
 const msg = {
         to: username,
-        from: 'shrutimahajan979@gmail.com',
+        from: 'shrutimahajan3611@gmail.com',
         subject: 'OTP',
         text: 'service available',
         html: 'Your One Time Login Password For CFM is ' +otp,
@@ -44,13 +44,14 @@ res.status(200).send({  status:true,hash: fullHash, otp });
 exports.verify = async (req, res) => {
     const hash = req.body.hash;
     const otp = req.body.otp;
+    const username=req.body.username
     let [ hashValue, expires ] = hash.split('.');
     
     let now = Date.now();
     if (now > parseInt(expires)) {
          return res.status(504).send({ status:false,message: 'Timeout. Please try again' });
     }
-    let data = `${otp}.${expires}`;
+    let data = `${username}.${otp}.${expires}`;
     let newCalculatedHash = crypto.createHmac('sha256', smsKey).update(data).digest('hex');
     if (newCalculatedHash === hashValue) {
         return res.status(504).send({ status:true });
@@ -68,4 +69,18 @@ exports.verifygmail = async (req, res) => {
     const query1 = `update teacher set gmail_valid='true' where username='${req.body.username}'`;
     let getresult1 = await queryExecutor(query1);
     res.send({ status: true})
+}
+
+exports.otpverify = async (req, res) => {
+    const username=req.body.username;
+    const query = `select * from student where username='${req.body.username}'`;
+    let getresult = await queryExecutor(query);
+    const query1 = `select * from teacher where username='${req.body.username}'`;
+    let getresult1 = await queryExecutor(query1);
+    if(getresult.rows.length>0)
+    res.send({status:true})
+    else if(getresult1.rows.length>0)
+    res.send({status:true})
+    else
+    res.send({status:false})
 }

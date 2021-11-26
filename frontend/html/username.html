@@ -27,6 +27,7 @@
         <div class="ucard" style="width: 18rem;">
             <img class="card-img-top img-fluid thumbnailImage"  src="/img/otp.png" alt="">
             <div class="card-body">
+              <p id="warning"></p>
                 <h6 class="utext thumbnailImage" >Enter username@gmail.com</h6>
                 <input type="text" class="uinput" id="username" >
                 <button type="button" class="cbutton" onclick="call()" >Submit</button>
@@ -38,7 +39,22 @@
     function call(){
         const username=document.querySelector('#username').value;
         sessionStorage.setItem("username",username);
-        fetch(`http://localhost:3000/otp/send`, {
+        fetch(`http://localhost:3000/otp/otpverify`, {
+  method: "POST",
+  body: JSON.stringify({
+    username
+  }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8",
+    'Accept': 'application/json'
+  }
+})
+  .then(response => {
+    return response.json()
+  })
+  .then(response => {
+    if(response.status==true){
+      fetch(`http://localhost:3000/otp/send`, {
   method: "POST",
   body: JSON.stringify({
     username
@@ -56,6 +72,11 @@
       alert("Check otp which we sent on entered gmail account")
     window.location.href = "/otp.html";
   });
+    }
+    else{
+     document.querySelector("#warning").innerHTML="Firstly singup before verifying account";
+    }
+})
     }
    </script>
     

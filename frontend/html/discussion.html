@@ -44,6 +44,8 @@
   <div id="data1"></div>
 
   <script>
+      if(sessionStorage.getItem("role")!="student"&&sessionStorage.getItem("role")!="teacher")
+      window.history.back()
       sessionStorage.removeItem("topic")
       function store(id){
           sessionStorage.setItem("topic",id);

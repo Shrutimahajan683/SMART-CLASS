@@ -24,6 +24,8 @@
 
 <body>
     <script>
+        if(sessionStorage.getItem("role")!="student")
+        window.history.back()
         function call(){
             window.location.href = "/allquiz.html";
         }

@@ -127,16 +127,29 @@ exports.teacherrequests = async (req, res) => {
 exports.studentaccept = async (req, res) => {
     const query = `update student set valid='true' where username='${req.body.data}'`;
     let getresult = await queryExecutor(query);
+    sgMail.setApiKey('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');
+        const msg = {
+                to: req.body.data,
+                from: 'shrutimahajan3611@gmail.com',
+                subject: 'Access request declined',
+                text: 'service available',
+                html: 'Dear student your request for accessing website has been accepted  by admin. Welcome to Smart Class !',
+        };
+        sgMail.send(msg).then(() => {
+        console.log('sent');
+        }).catch((error) => {
+        console.log('error', error);
+        });
     res.send({ status: true})
 }
 
 exports.studentdecline = async (req, res) => {
     const query = `delete from student  where username='${req.body.data}'`;
     let getresult = await queryExecutor(query);
-    sgMail.setApiKey('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');
+    sgMail.setApiKey('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');
         const msg = {
                 to: req.body.data,
-                from: 'shrutimahajan979@gmail.com',
+                from: 'shrutimahajan3611@gmail.com',
                 subject: 'Access request declined',
                 text: 'service available',
                 html: 'Dear student your request for accessing website has been declined by admin',
@@ -154,16 +167,29 @@ exports.teacheraccept = async (req, res) => {
     const query = `update teacher set valid='true' where username='${req.body.data}'`;
     console.log(query)
     let getresult = await queryExecutor(query);
+    sgMail.setApiKey('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');
+        const msg = {
+                to: req.body.data,
+                from: 'shrutimahajan3611@gmail.com',
+                subject: 'Access request declined',
+                text: 'service available',
+                html: 'Dear teacher your request for accessing website has been accepted  by admin. Welcome to Smart Class !',
+        };
+        sgMail.send(msg).then(() => {
+        console.log('sent');
+        }).catch((error) => {
+        console.log('error', error);
+        });
     res.send({ status: true})
 }
 
 exports.teacherdecline = async (req, res) => {
     const query = `delete from teacher where username='${req.body.data}'`;
     let getresult = await queryExecutor(query);
-    sgMail.setApiKey('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');
+    sgMail.setApiKey('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');
         const msg = {
                 to: req.body.data,
-                from: 'shrutimahajan979@gmail.com',
+                from: 'shrutimahajan3611@gmail.com',
                 subject: 'Access request declined',
                 text: 'service available',
                 html: 'Dear teacher your request for accessing website has been declined by admin',
@@ -263,10 +289,10 @@ exports.acceptclassdata = async (req, res) => {
         length=capacity
         for (let i = 0; i < length; i++) {
             students=students+' '+getresult1.rows[i].username;
-            sgMail.setApiKey('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');
+            sgMail.setApiKey('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');
         const msg = {
                 to: getresult1.rows[i].username,
-                from: 'shrutimahajan979@gmail.com',
+                from: 'shrutimahajan3611@gmail.com',
                 subject: 'Class Scheduled',
                 text: 'service available',
                 html: 'Dear Student Your class of '+subject+' has been scheduled on '+date+' at '+time,
@@ -278,10 +304,10 @@ exports.acceptclassdata = async (req, res) => {
         });
 
         }
-        sgMail.setApiKey('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');
+        sgMail.setApiKey('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');
         const msg = {
                 to: username,
-                from: 'shrutimahajan979@gmail.com',
+                from: 'shrutimahajan3611@gmail.com',
                 subject: 'Class Scheduled',
                 text: 'service available',
                 html: 'Dear '+name+' Your class has been scheduled on '+date+' for class '+sclass+' at '+time+' .The emails of the students  who requested for this class are '+students,

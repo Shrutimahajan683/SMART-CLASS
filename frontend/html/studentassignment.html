@@ -35,6 +35,8 @@
   <div class="row justify-content-center" id="submitassignment">
   </div>
     <script>
+      if(sessionStorage.getItem("role")!="student")
+      window.history.back()
          sessionStorage.removeItem("assignment");
         function call(data){
             sessionStorage.setItem("assignment",data);

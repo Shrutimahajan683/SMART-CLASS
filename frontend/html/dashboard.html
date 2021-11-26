@@ -38,6 +38,8 @@
     </div>
 </body>
 <script>
+  if(sessionStorage.getItem("role")!="admin")
+  window.history.back()
     function studentaccept(data){
         fetch(`http://localhost:3000/signin/studentaccept`, {
       method: "POST",

@@ -58,6 +58,8 @@
 
       <!-- <h1 class="substyle" id="substyle">All Assignments</h1> -->
       <script>
+        if(sessionStorage.getItem("role")!="teacher")
+       window.history.back()
     //       function call(){
     //        const form=document.getElementById("submitFile")
     //        console.log(form);

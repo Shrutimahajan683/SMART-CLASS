@@ -32,6 +32,8 @@
   <div  id="data">
   </div>
     <script>
+      if(sessionStorage.getItem("role")!="student")
+      window.history.back()
          const id=sessionStorage.getItem("assignment");
         fetch(`http://localhost:3000/anotherfeature/submitassignment`, {
   method: "POST",

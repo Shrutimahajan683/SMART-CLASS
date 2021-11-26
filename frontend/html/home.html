@@ -34,6 +34,8 @@
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
   <script>
+    if(sessionStorage.getItem("role")!="student"&&sessionStorage.getItem("role")!="teacher")
+      window.history.back()
      sessionStorage.removeItem("identity")
     const apiResult = sessionStorage.getItem("data");
     const result = apiResult.split(',')

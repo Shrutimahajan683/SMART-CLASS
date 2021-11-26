@@ -24,9 +24,14 @@
 
 <body>
     <script>
+        if(sessionStorage.getItem("role")!="student"&&sessionStorage.getItem("role")!="teacher"&&sessionStorage.getItem("role")!="admin")
+         window.history.back()
         function logout() {
-            sessionStorage.removeItem("token");
-            sessionStorage.removeItem("data")
+            if(sessionStorage.getItem("role")=="student"||sessionStorage.getItem("role")=="teacher"){
+                sessionStorage.removeItem("data");
+                sessionStorage.removeItem("token");
+            }
+            sessionStorage.removeItem("role");
             window.location.href = "/signin.html";
         }
         function goback() {

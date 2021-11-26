@@ -24,6 +24,8 @@
 
 <body>
     <script>
+        if(sessionStorage.getItem("role")!="teacher")
+       window.history.back()
         function requestcall(){
             window.location.href = "/requests.html";
         }

@@ -32,6 +32,8 @@
   <div class="row justify-content-center bsub" id="data"  >
   </div>
     <script>
+      if(sessionStorage.getItem("role")!="teacher")
+       window.history.back()
         function call(id,name){
             const marks=document.querySelector("#marks").value
             fetch(`http://localhost:3000/anotherfeature/updatemarks`, {

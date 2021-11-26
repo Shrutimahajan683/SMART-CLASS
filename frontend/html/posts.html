@@ -25,10 +25,17 @@
 </head>
 
 <body>
+    <ul>
+        <form action="/logout.html">
+          <input type="submit" class="logout" value="Logout" />
+        </form>
+      </ul>
     <h1 class="substyle" id="allposts">All POSTS</h1>
     <div id="data"></div>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script>
+        if(sessionStorage.getItem("role")!="student"&&sessionStorage.getItem("role")!="teacher")
+      window.history.back()
         let parent=``;
        const id=sessionStorage.getItem("topic");
        fetch(`http://localhost:3000/discussion/fetchposts`, {
@@ -90,7 +97,7 @@
         function place(author,description,url){
             document.getElementById("tdesc").innerHTML=`<h6>${author} - ${description}<h6>`
              parent=`${author} - ${description}`;
-              window.location=url;
+              document.getElementById("topic").scrollIntoView();
         }
 
         function call(){
@@ -112,7 +119,6 @@
           return response.json()
         })
         .then(response => {
-            alert("Post Submitted");
             window.location.href = "/posts.html";
         })
         }
