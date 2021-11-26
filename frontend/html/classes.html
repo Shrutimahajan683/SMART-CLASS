@@ -23,22 +23,6 @@
 </head>
 
 <body>
-    <script>
-        if(sessionStorage.getItem("role")!="teacher")
-       window.history.back()
-        function requestcall(){
-            window.location.href = "/requests.html";
-        }
-        function assignmentcall(){
-            window.location.href = "/assignment.html";
-        }
-        function quizcall(){
-            window.location.href = "/quiz.html";
-        }
-        function discussion(){
-            window.location.href = "/discussion.html";
-        }
-    </script>
     <ul>
         <form action="/logout.html">
             <input type="submit" class="logout" value="Logout" />
@@ -73,5 +57,5 @@
         </div>
     </div>
 </body>
-
+<script src="/js/classes.js"></script>
 </html>

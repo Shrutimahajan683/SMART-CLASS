@@ -33,62 +33,7 @@
   </div>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
-  <script>
-    if(sessionStorage.getItem("role")!="student"&&sessionStorage.getItem("role")!="teacher")
-      window.history.back()
-     sessionStorage.removeItem("identity")
-    const apiResult = sessionStorage.getItem("data");
-    const result = apiResult.split(',')
-
-    let htmlCode = ``;
-    if (isNaN(result[0]))
-    document.querySelector("#hometext").innerHTML="Subjects"
-    else
-    document.querySelector("#hometext").innerHTML="Classes"
-    function call(data) {
-      sessionStorage.setItem("identity", data);
-      if (isNaN(data))
-        window.location.href = "/course.html";
-      else
-        window.location.href = "/classes.html";
-    }
-
-    // to get each single elephant object from the array and use them to build out html string, we need to open up our array, and we do that using forEach method. The forEach method, finds each item(object) in the array and returns them, this means we get 4 items that are objects back.
-
-    result.forEach(function (card) {
-      // uncomment the line below, to see each of the 4 objects rendered in the console.
-      //console.log(singleElephantObjects);
-
-      // we take our previous empty htmlCode variable and add our html codes to it.
-
-      // because the forEach method returns objects, we can then use the dot notation to reference children of the object, e.g, elephant.title;
-      htmlCode =
-        htmlCode +
-        `
-        <div class="card1" style="width: 18rem;">
-            <img class="card-img-top img-fluid thumbnailImage" onclick='call("${card}")' src="/img/books.png" alt="">
-            <div class="card-body">
-              <button type="button" class="books justify-content-center" onclick='call("${card}")'>${card}</button>
-            </div>
-        </div>
-  `;
-      // uncomment the line below to see the output in the browser console.
-      // console.log(htmlCode);
-    });
-
-    // currently, we have out html code showing in the browser console, we need to send it to our html file and render it there.
-    // here we define out the cards we want to be rendered to the DOM.
-
-    // ".all-elephant-cards" is the class of the empty div back in our index.html. We want to render the cards from our JS inside that div.
-    // we are simply saying, "let elephantCards be = to that div", to target that div, we reference the class we gave to it.
-    const cards = document.querySelector("#data");
-    console.log(htmlCode)
-
-    // here's how we do the render;
-    // since elephantCards is now = to that div, we now say let the inside of that div take in our htmlCode variable that holds our html codes.
-    cards.innerHTML = htmlCode;
-  </script>
 
 </body>
-
+<script src="/js/home.js"></script>
 </html>

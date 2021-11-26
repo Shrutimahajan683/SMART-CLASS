@@ -1,3 +1,14 @@
+if(sessionStorage.getItem("role")!="student")
+        window.history.back()
+        function call(){
+            window.location.href = "/allquiz.html";
+        }
+        function view(){
+            window.location.href = "/studentassignment.html";
+        }
+        function discussion(){
+            window.location.href = "/discussion.html";
+        }
 function request(){
     const time=document.querySelector("#timePicker").value;
     const token=sessionStorage.getItem("token");

@@ -23,19 +23,6 @@
 </head>
 
 <body>
-    <script>
-        if(sessionStorage.getItem("role")!="student")
-        window.history.back()
-        function call(){
-            window.location.href = "/allquiz.html";
-        }
-        function view(){
-            window.location.href = "/studentassignment.html";
-        }
-        function discussion(){
-            window.location.href = "/discussion.html";
-        }
-    </script>
     <ul>
         <form action="/logout.html">
             <input type="submit" class="logout" value="Logout" />
