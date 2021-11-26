@@ -12,11 +12,22 @@ const {
 } = require("../Reusable functions/ObjecttoArrayConverter");
 const { jwtVerifier } = require("../Reusable functions/jwtVerifier");
 const crypto = require('crypto');
+const nodemailer=require('nodemailer')
 const sgMail = require('@sendgrid/mail');
 const smsKey = process.env.SMS_SECRET_KEY;
+let transporter=nodemailer.createTransport({
+    service:"gmail",
+    auth:{
+        user:process.env.GMAILID,
+        pass:process.env.PASS
+    },
+    tls:{
+        rejectUnauthorized:false,
+    },
+})
 
 exports.send = async (req, res) => {
-console.log(req.body)
+    try{
 const username=req.body.username;
 console.log(username)
 const otp = Math.floor(100000 + Math.random() * 900000);
@@ -25,23 +36,41 @@ const expires = Date.now() + ttl;
 const data = `${username}.${otp}.${expires}`;
 const hash = crypto.createHmac('sha256', smsKey).update(data).digest('hex');
 const fullHash = `${hash}.${expires}`;
-sgMail.setApiKey('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');
-const msg = {
-        to: username,
-        from: 'shrutimahajan3611@gmail.com',
-        subject: 'OTP',
-        text: 'service available',
-        html: 'Your One Time Login Password For CFM is ' +otp,
-};
-sgMail.send(msg).then(() => {
-console.log('sent');
-}).catch((error) => {
-console.log('error', error);
-});
-res.status(200).send({  status:true,hash: fullHash, otp });
+// sgMail.setApiKey('');
+// const msg = {
+//         to: username,
+//         from: 'shrutimahajan3611@gmail.com',
+//         subject: 'OTP',
+//         text: 'service available',
+//         html: 'Your One Time Login Password For CFM is ' +otp,
+// };
+// sgMail.send(msg).then(() => {
+// console.log('sent');
+// }).catch((error) => {
+// console.log('error', error);
+// });
+let mailoptions={
+    from:process.env.GMAILID,
+    to:username,
+    subject:"OTP",
+    text:"Your One Time Login Password is"+otp
+}
+
+transporter.sendMail(mailoptions,function(err,success){
+    if(err)
+    console.log(err);
+    else
+    console.log("mail send");
+})
+
+res.status(200).send({  status:true,hash: fullHash, otp ,mssg:process.env.USERNAME});
+    }catch(err){
+        console.log(err);
+    }
 }
 
 exports.verify = async (req, res) => {
+    try{
     const hash = req.body.hash;
     const otp = req.body.otp;
     const username=req.body.username
@@ -60,18 +89,26 @@ exports.verify = async (req, res) => {
     {
         return res.status(504).send({ status:false,message:"Wrong otp" });
     }
+}catch(err){
+    console.log(err);
+}
 }
 
 exports.verifygmail = async (req, res) => {
+    try{
     console.log(req.body.username)
     const query = `update student set gmail_valid='true' where username='${req.body.username}'`;
     let getresult = await queryExecutor(query);
     const query1 = `update teacher set gmail_valid='true' where username='${req.body.username}'`;
     let getresult1 = await queryExecutor(query1);
     res.send({ status: true})
+    }catch(err){
+        console.log(err);
+    }
 }
 
 exports.otpverify = async (req, res) => {
+    try{
     const username=req.body.username;
     const query = `select * from student where username='${req.body.username}'`;
     let getresult = await queryExecutor(query);
@@ -83,4 +120,7 @@ exports.otpverify = async (req, res) => {
     res.send({status:true})
     else
     res.send({status:false})
+    }catch(err){
+        console.log(err);
+    }
 }

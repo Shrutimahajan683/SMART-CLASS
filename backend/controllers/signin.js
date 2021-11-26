@@ -13,8 +13,21 @@ const {
 } = require("../Reusable functions/ObjecttoArrayConverter");
 const { jwtVerifier } = require("../Reusable functions/jwtVerifier");
 const { student } = require('./signup');
+const nodemailer=require('nodemailer')
+let transporter=nodemailer.createTransport({
+    service:"gmail",
+    auth:{
+        user:process.env.GMAILID,
+        pass:process.env.PASS
+    },
+    tls:{
+        rejectUnauthorized:false,
+    },
+})
+
 
 exports.student = async (req, res) => {
+    try{
     const {
         username,
         password
@@ -54,9 +67,13 @@ exports.student = async (req, res) => {
     else {
         res.send({ status: false, mssg: "User doesn't exists" })
     }
+}catch(err){
+    console.log(err);
+}
 }
 
 exports.teacher = async (req, res) => {
+    try{
     const {
         username,
         password
@@ -89,9 +106,13 @@ exports.teacher = async (req, res) => {
     else {
         res.send({ status: false, mssg: "User doesn't exists" })
     }
+}catch(err){
+    console.log(err);
+}
 }
 
 exports.admin = async (req, res) => {
+    try{
     console.log("hi")
     const {
         username,
@@ -110,96 +131,175 @@ exports.admin = async (req, res) => {
     else {
         res.send({ status: false, message: "User doesn't exists" })
     }
+}catch(err){
+    console.log(err);
+}
 }
 
 exports.studentrequests = async (req, res) => {
+    try{
     const query = `select * from student where valid='f'`;
     let getresult = await queryExecutor(query);
     res.send({ status: true, data:getresult.rows })
+    }catch(err){
+        console.log(err);
+    }
 }
 
 exports.teacherrequests = async (req, res) => {
+    try{
     const query = `select id,full_name,username,subject,string_agg(classes,',') as classlist from teacher where valid='f' group by (id,full_name,username,subject)`;
     let getresult = await queryExecutor(query);
     res.send({ status: true, data:getresult.rows })
+    }catch(err){
+        console.log(err);
+    }
 }
 
 exports.studentaccept = async (req, res) => {
+    try{
     const query = `update student set valid='true' where username='${req.body.data}'`;
     let getresult = await queryExecutor(query);
-    sgMail.setApiKey('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');
-        const msg = {
-                to: req.body.data,
-                from: 'shrutimahajan3611@gmail.com',
-                subject: 'Access request declined',
-                text: 'service available',
-                html: 'Dear student your request for accessing website has been accepted  by admin. Welcome to Smart Class !',
-        };
-        sgMail.send(msg).then(() => {
-        console.log('sent');
-        }).catch((error) => {
-        console.log('error', error);
-        });
+    // sgMail.setApiKey('');
+    //     const msg = {
+    //             to: req.body.data,
+    //             from: 'shrutimahajan3611@gmail.com',
+    //             subject: 'Access request declined',
+    //             text: 'service available',
+    //             html: 'Dear student your request for accessing website has been accepted  by admin. Welcome to Smart Class !',
+    //     };
+    //     sgMail.send(msg).then(() => {
+    //     console.log('sent');
+    //     }).catch((error) => {
+    //     console.log('error', error);
+    //     });
+    let mailoptions={
+        from:process.env.GMAILID,
+        to:req.body.data,
+        subject:"Access request accepted",
+        text:"Dear student your request for accessing website has been accepted  by admin. Welcome to Smart Class !"
+    }
+    
+    transporter.sendMail(mailoptions,function(err,success){
+        if(err)
+        console.log(err);
+        else
+        console.log("mail send");
+    })
     res.send({ status: true})
+}catch(err){
+    console.log(err);
+}
 }
 
 exports.studentdecline = async (req, res) => {
+    try{
     const query = `delete from student  where username='${req.body.data}'`;
     let getresult = await queryExecutor(query);
-    sgMail.setApiKey('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');
-        const msg = {
-                to: req.body.data,
-                from: 'shrutimahajan3611@gmail.com',
-                subject: 'Access request declined',
-                text: 'service available',
-                html: 'Dear student your request for accessing website has been declined by admin',
-        };
-        sgMail.send(msg).then(() => {
-        console.log('sent');
-        }).catch((error) => {
-        console.log('error', error);
-        });
+    // sgMail.setApiKey('');
+    //     const msg = {
+    //             to: req.body.data,
+    //             from: 'shrutimahajan3611@gmail.com',
+    //             subject: 'Access request declined',
+    //             text: 'service available',
+    //             html: 'Dear student your request for accessing website has been declined by admin',
+    //     };
+    //     sgMail.send(msg).then(() => {
+    //     console.log('sent');
+    //     }).catch((error) => {
+    //     console.log('error', error);
+    //     });
+    let mailoptions={
+        from:process.env.GMAILID,
+        to:req.body.data,
+        subject:"Access request declined",
+        text:"Dear student your request for accessing website Smart Class has been declined!"
+    }
+    
+    transporter.sendMail(mailoptions,function(err,success){
+        if(err)
+        console.log(err);
+        else
+        console.log("mail send");
+    })
     res.send({ status: true})
+}catch(err){
+    console.log(err);
+}
 }
 
 exports.teacheraccept = async (req, res) => {
+    try{
     console.log("teacher")
     const query = `update teacher set valid='true' where username='${req.body.data}'`;
     console.log(query)
     let getresult = await queryExecutor(query);
-    sgMail.setApiKey('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');
-        const msg = {
-                to: req.body.data,
-                from: 'shrutimahajan3611@gmail.com',
-                subject: 'Access request declined',
-                text: 'service available',
-                html: 'Dear teacher your request for accessing website has been accepted  by admin. Welcome to Smart Class !',
-        };
-        sgMail.send(msg).then(() => {
-        console.log('sent');
-        }).catch((error) => {
-        console.log('error', error);
-        });
+    // sgMail.setApiKey('');
+    //     const msg = {
+    //             to: req.body.data,
+    //             from: 'shrutimahajan3611@gmail.com',
+    //             subject: 'Access request declined',
+    //             text: 'service available',
+    //             html: 'Dear teacher your request for accessing website has been accepted  by admin. Welcome to Smart Class !',
+    //     };
+    //     sgMail.send(msg).then(() => {
+    //     console.log('sent');
+    //     }).catch((error) => {
+    //     console.log('error', error);
+    //     });
+    let mailoptions={
+        from:process.env.GMAILID,
+        to:req.body.data,
+        subject:"Access request accepted",
+        text:"Dear teacher your request for accessing website has been accepted  by admin. Welcome to Smart Class !"
+    }
+    
+    transporter.sendMail(mailoptions,function(err,success){
+        if(err)
+        console.log(err);
+        else
+        console.log("mail send");
+    })
     res.send({ status: true})
+}catch(err){
+    console.log(err);
+}
 }
 
 exports.teacherdecline = async (req, res) => {
+    try{
     const query = `delete from teacher where username='${req.body.data}'`;
     let getresult = await queryExecutor(query);
-    sgMail.setApiKey('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');
-        const msg = {
-                to: req.body.data,
-                from: 'shrutimahajan3611@gmail.com',
-                subject: 'Access request declined',
-                text: 'service available',
-                html: 'Dear teacher your request for accessing website has been declined by admin',
-        };
-        sgMail.send(msg).then(() => {
-        console.log('sent');
-        }).catch((error) => {
-        console.log('error', error);
-        });
+    // sgMail.setApiKey('');
+    //     const msg = {
+    //             to: req.body.data,
+    //             from: 'shrutimahajan3611@gmail.com',
+    //             subject: 'Access request declined',
+    //             text: 'service available',
+    //             html: 'Dear teacher your request for accessing website has been declined by admin',
+    //     };
+    //     sgMail.send(msg).then(() => {
+    //     console.log('sent');
+    //     }).catch((error) => {
+    //     console.log('error', error);
+    //     });
+    let mailoptions={
+        from:process.env.GMAILID,
+        to:req.body.data,
+        subject:"Access request declined",
+        text:"Dear student your request for accessing website Smart Class has been declined!"
+    }
+    
+    transporter.sendMail(mailoptions,function(err,success){
+        if(err)
+        console.log(err);
+        else
+        console.log("mail send");
+    })
     res.send({ status: true})
+}catch(err){
+    console.log(err);
+}
 }
 
 exports.request = async (req, res) => {
@@ -262,6 +362,7 @@ exports.classdata = async (req, res) => {
       catch(err){
          console.log(err);
       }
+    
 }
 
 exports.acceptclassdata = async (req, res) => {
@@ -289,34 +390,60 @@ exports.acceptclassdata = async (req, res) => {
         length=capacity
         for (let i = 0; i < length; i++) {
             students=students+' '+getresult1.rows[i].username;
-            sgMail.setApiKey('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');
-        const msg = {
-                to: getresult1.rows[i].username,
-                from: 'shrutimahajan3611@gmail.com',
-                subject: 'Class Scheduled',
-                text: 'service available',
-                html: 'Dear Student Your class of '+subject+' has been scheduled on '+date+' at '+time,
-        };
-        sgMail.send(msg).then(() => {
-        console.log('sent');
-        }).catch((error) => {
-        console.log('error', error);
-        });
+        //     sgMail.setApiKey('');
+        // const msg = {
+        //         to: getresult1.rows[i].username,
+        //         from: 'shrutimahajan3611@gmail.com',
+        //         subject: 'Class Scheduled',
+        //         text: 'service available',
+        //         html: 'Dear Student Your class of '+subject+' has been scheduled on '+date+' at '+time,
+        // };
+        // sgMail.send(msg).then(() => {
+        // console.log('sent');
+        // }).catch((error) => {
+        // console.log('error', error);
+        // });
+        let mailoptions={
+            from:process.env.GMAILID,
+            to:getresult1.rows[i].username,
+            subject:"Class Scheduled",
+            text:"Dear Student Your class of '+subject+' has been scheduled on "+date+" at "+time,
+        }
+        
+        transporter.sendMail(mailoptions,function(err,success){
+            if(err)
+            console.log(err);
+            else
+            console.log("mail send");
+        })
 
         }
-        sgMail.setApiKey('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');
-        const msg = {
-                to: username,
-                from: 'shrutimahajan3611@gmail.com',
-                subject: 'Class Scheduled',
-                text: 'service available',
-                html: 'Dear '+name+' Your class has been scheduled on '+date+' for class '+sclass+' at '+time+' .The emails of the students  who requested for this class are '+students,
-        };
-        sgMail.send(msg).then(() => {
-        console.log('sent');
-        }).catch((error) => {
-        console.log('error', error);
-        });
+        // sgMail.setApiKey('');
+        // const msg = {
+        //         to: username,
+        //         from: 'shrutimahajan3611@gmail.com',
+        //         subject: 'Class Scheduled',
+        //         text: 'service available',
+        //         html: 'Dear '+name+' Your class has been scheduled on '+date+' for class '+sclass+' at '+time+' .The emails of the students  who requested for this class are '+students,
+        // };
+        // sgMail.send(msg).then(() => {
+        // console.log('sent');
+        // }).catch((error) => {
+        // console.log('error', error);
+        // });
+        let mailoptions={
+            from:process.env.GMAILID,
+            to:username,
+            subject:"Class Scheduled",
+            text:"Dear "+name+" Your class has been scheduled on "+date+" for class "+sclass+" at "+time+" .The emails of the students  who requested for this class are "+students
+        }
+        
+        transporter.sendMail(mailoptions,function(err,success){
+            if(err)
+            console.log(err);
+            else
+            console.log("mail send");
+        })
         const query2 = `delete from classrequest where subject='${subject}' and time='${time}' and sclass='${sclass}' and date='${date}' `;
         let getresult2 = await queryExecutor(query2);
       res.send({Status:true});
@@ -483,6 +610,4 @@ exports.viewquiz = async (req, res) => {
 
 exports.fileup = async (req, res) => {
     console.log(req.body)
-//   if(req.files)
-//   console.log(req.files)
 }

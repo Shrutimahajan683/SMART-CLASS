@@ -11,6 +11,7 @@ const Upload=require("express-fileupload")
 app.use(Upload())
 
 exports.teacher = async (req, res) => {
+  try{
   const {
     fullname,
     username,
@@ -41,9 +42,13 @@ exports.teacher = async (req, res) => {
     })
     return res.json({ Status: true,message:username })
   }
+}catch(err){
+  return res.json({ Status: false })
+}
 }
 
 exports.student = async (req, res) => {
+  try{
   const {
     fullname,
     username,
@@ -72,5 +77,8 @@ exports.student = async (req, res) => {
     console.log("hye")
     return res.json({ Status: true,message:username })
   }
+}catch(err){
+  return res.json({ Status: false })
+}
 }
 

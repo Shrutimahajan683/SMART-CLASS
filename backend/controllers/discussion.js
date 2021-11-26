@@ -13,6 +13,7 @@ const {
 const { jwtVerifier } = require("../Reusable functions/jwtVerifier");
 
 exports.submittopic = async (req, res) => {
+    try{
     console.log(req.body);
     const {
         title,
@@ -51,9 +52,14 @@ exports.submittopic = async (req, res) => {
       let result1 = await queryExecutor(query1)
       console.log(result1);
       res.send({status:true});
+    }
+    catch(err){
+        console.log(err);
+    }
 }
 
 exports.fetchtopics = async (req, res) => {
+    try{
     const {
         token,
         role,
@@ -73,16 +79,26 @@ exports.fetchtopics = async (req, res) => {
    let result1 = await queryExecutor(query1);
    res.send({status:true,data:result1.rows});
 }
+catch(err){
+    console.log(err);
+}
+}
 
 exports.fetchposts = async (req, res) => {
+    try{
     const id=req.body.id;
     const query=`select * from posts where topic_id='${id}'`;
     let result = await queryExecutor(query);
     console.log(result);
     res.send({status:true,data:result.rows});
+    }
+    catch(err){
+        console.log(err);
+    }
 }
 
 exports.submitposts = async (req, res) => {
+    try{
     const {
         topic_id,
         token,
@@ -115,4 +131,7 @@ exports.submitposts = async (req, res) => {
   })
   let result1 = await queryExecutor(query1);
   res.send({status:true});
+}catch(err){
+    console.log(err);
+}
 }

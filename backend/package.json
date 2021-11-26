@@ -43,6 +43,7 @@
     "minimatch": "^3.0.4",
     "multer": "^1.4.3",
     "node-fetch": "^2.6.5",
+    "nodemailer": "^6.7.2",
     "once": "^1.4.0",
     "pako": "^1.0.11",
     "path": "^0.12.7",

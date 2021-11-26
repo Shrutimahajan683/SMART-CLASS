@@ -15,6 +15,7 @@ const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
 exports.assignment = async (req, res) => {
+    try{
     let id =uuidv4()
     const {
         token,
@@ -39,9 +40,14 @@ exports.assignment = async (req, res) => {
       })
       let result = await queryExecutor(query1)
       res.send({ status: true})
+    }
+    catch(err){
+        console.log(err);
+    }
 }
 
 exports.studentassignment = async (req, res) => {
+    try{
     const token=req.body.token
     const subject=req.body.subject;
     let mem = jwt.verify(token, process.env.PRIVATEKEY);
@@ -52,9 +58,14 @@ exports.studentassignment = async (req, res) => {
     const query1 = `select * from files where subject='${subject}' and sclass='${sclass}' and valid='f'`;
     let getresult1 = await queryExecutor(query1);
     res.send({ status: true,data:getresult1.rows});
+    }
+    catch(err){
+        console.log(err);
+    }
 }
 
 exports.studentsubmittedassignment=async(req,res)=>{
+    try{
     const token=req.body.token
     const subject=req.body.subject;
     let mem = jwt.verify(token, process.env.PRIVATEKEY);
@@ -75,16 +86,25 @@ exports.studentsubmittedassignment=async(req,res)=>{
     result.push(obj1);
     }
     res.send({ status: true,data:result});
+}catch(err){
+    console.log(err);
+}
 }
 
 exports.submitassignment = async (req, res) => {
+    try{
     const id=req.body.id;
     const query = `select * from files where id='${id}' `;
     let getresult = await queryExecutor(query);
     res.send({ status: true,data:getresult.rows});
+    }
+    catch(err){
+        console.log(err);
+    }
 }
 
 exports.submission = async (req, res) => {
+    try{
     const {
         id,
         token,
@@ -107,9 +127,14 @@ exports.submission = async (req, res) => {
       })
       let result = await queryExecutor(query1)
       res.send({ status: true})
+    }
+    catch(err){
+        console.log(err);
+    }
 }
 
 exports.fetchassignments = async (req, res) => {
+    try{
     const {
         token,
         sclass
@@ -122,8 +147,13 @@ exports.fetchassignments = async (req, res) => {
     let getresult1 = await queryExecutor(query1);
     res.send({ status: true,data:getresult1.rows});
 }
+catch(err){
+    console.log(err);
+}
+}
 
 exports.fetchsubmissions = async (req, res) => {
+    try{
     const {
         assignment
     } = req.body;
@@ -131,19 +161,32 @@ exports.fetchsubmissions = async (req, res) => {
     let getresult = await queryExecutor(query);
     res.send({ status: true,data:getresult.rows});
 }
+catch(err){
+    console.log(err);
+}
+}
 
 exports.updatemarks = async (req, res) => {
+    try{
     const id=req.body.id;
     const name=req.body.name;
     const marks=req.body.marks;
     const query=`update submittedfiles set marks='${marks}' where full_name='${name}'and id='${id}'`;
     let getresult = await queryExecutor(query);
     res.send({ status: true,marks});
+    }catch(err){
+        console.log(err);
+    }
 }
 
 exports.updatevalid = async (req, res) => {
+    try{
     const id=req.body.id;
     const query=`update files set valid='true' where id='${id}'`;
     let getresult = await queryExecutor(query);
     res.send({status:true});
+    }
+    catch(err){
+        console.log(err);
+    }
 }
