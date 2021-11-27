@@ -2,6 +2,7 @@ if(sessionStorage.getItem("role")!="student"&&sessionStorage.getItem("role")!="t
 window.history.back()
   let parent=``;
  const id=sessionStorage.getItem("topic");
+ //fetcing posts for discussion
  fetch(`http://localhost:3000/discussion/fetchposts`, {
   method: "POST",
   body: JSON.stringify({
@@ -32,6 +33,7 @@ const container=document.querySelector("#data")
       container.innerHTML=htmlCode;
       }
       else{
+//displaying all the posts
       for(let c=0;c<result.length;c++) {
 htmlCode =
   htmlCode +
@@ -64,6 +66,7 @@ cards.innerHTML=htmlCode
         document.getElementById("topic").scrollIntoView();
   }
 
+  //submitting posts
   function call(){
       fetch(`http://localhost:3000/discussion/submitposts`, {
   method: "POST",

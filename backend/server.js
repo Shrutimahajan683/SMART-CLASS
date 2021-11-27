@@ -14,33 +14,26 @@ app.use(express.json())
 const signupRouter=require('./router/signup')
 const signinRouter=require('./router/signin')
 const otpRouter=require('./router/otp')
-const featureRouter=require('./router/feature')
+const featureRouter=require('./router/assignment')
 const discussionRouter=require('./router/discussion')
+const classrequest=require('./router/classrequest')
+const quiz=require('./router/quiz')
 app.use('/signup',signupRouter)
 app.use('/signin',signinRouter)
 app.use('/otp',otpRouter)
 app.use('/discussion',discussionRouter)
+app.use('/classrequest',classrequest)
+app.use('/quiz',quiz)
 const path =require('path')
 
 const storage = multer.diskStorage({
     destination: './uploads',
     filename: function (req, file, cb) {
-    //   const mimeExtension={
-    //       'image/pdf':'.pdf'
-    // mimeExtension[file.mimetype]
-    //   }
       cb(null, file.fieldname + '-' + Date.now()+path.extname(file.originalname))
     }
   })
 
 
-//   fileFilter:(req,file,cb)=>{
-//     if(file.mimetype==='image/pdf'){
-//         cb(null,true)
-//     }else{
-//         cb(null,false)
-//     }
-// }
   const upload = multer({ storage: storage,
  });
 
@@ -50,9 +43,7 @@ app.post("/feature/uploadassignment", upload.single("files"), (req,res)=>{
     return res.json({ status: true ,data:req.file})
 });
 
-// function uploadFiles(req, res) {
-//         res.json({ data:req.file });
-// }
+
 app.get('/image/:filename', (req, res) => {
     const { filename } = req.params;
     const dirname = path.resolve();

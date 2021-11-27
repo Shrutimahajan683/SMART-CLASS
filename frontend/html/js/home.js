@@ -18,6 +18,7 @@ if(sessionStorage.getItem("role")!="student"&&sessionStorage.getItem("role")!="t
     }
 
 
+    //rendering home page like classes/courses
     result.forEach(function (card) {
       htmlCode =
         htmlCode +

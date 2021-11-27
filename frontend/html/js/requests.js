@@ -4,7 +4,9 @@ if(sessionStorage.getItem("role")!="teacher")
 const sclass=sessionStorage.getItem("identity");
 function accept(time,date){
     const capacity=document.querySelector("#capacity").value;
-    fetch(`http://localhost:3000/signin/acceptclassdata`, {
+
+    //accepting class request and sending data to backend
+    fetch(`http://localhost:3000/classrequest/acceptclassdata`, {
         method: "POST",
         body: JSON.stringify({
           token,
@@ -27,9 +29,11 @@ function accept(time,date){
             window.location.href = "/classes.html";
 });
 }
+
+//decling class request and removing it from database by sending request to backend
 function decline(time,date){
     const token=sessionStorage.getItem("token");
-    fetch(`http://localhost:3000/signin/declineclassdata`, {
+    fetch(`http://localhost:3000/classrequest/declineclassdata`, {
         method: "POST",
         body: JSON.stringify({
           token,
@@ -51,7 +55,9 @@ function decline(time,date){
             window.location.href = "/classes.html";
 });
 }
- fetch(`http://localhost:3000/signin/classdata`, {
+
+//fetching class requests for teacher and displaying them for teacher
+ fetch(`http://localhost:3000/classrequest/classdata`, {
         method: "POST",
         body: JSON.stringify({
           token,
@@ -104,8 +110,8 @@ function decline(time,date){
                 <h6 class="rdate">Date: ${request.to_char}</h6>
                 <h6 class="rtime">Time: ${total}:00 ${s}</h6>
                 <h6 class="rcount">Count-${request.count}</h6>
-                <button type="button" class="racc" onclick='accept("${request.time}","${request.to_char}")'>accept<button>
-                <button type="button" onclick='decline("${request.time}","${request.to_char}")'>decline<button>
+                <button type="button" class="racc" onclick='accept("${request.time}","${request.to_char}")'>accept</button>
+                <button type="button" onclick='decline("${request.time}","${request.to_char}")'>decline</button>
                 </div>
               `;
             });

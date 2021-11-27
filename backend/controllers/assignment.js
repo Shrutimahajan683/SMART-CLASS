@@ -14,6 +14,7 @@ const { jwtVerifier } = require("../Reusable functions/jwtVerifier");
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
+//uploading assignments in databse
 exports.assignment = async (req, res) => {
     try{
     let id =uuidv4()
@@ -46,6 +47,7 @@ exports.assignment = async (req, res) => {
     }
 }
 
+//fetching student assignments from database
 exports.studentassignment = async (req, res) => {
     try{
     const token=req.body.token
@@ -64,6 +66,7 @@ exports.studentassignment = async (req, res) => {
     }
 }
 
+//fetching assignments from backend
 exports.studentsubmittedassignment=async(req,res)=>{
     try{
     const token=req.body.token
@@ -91,6 +94,7 @@ exports.studentsubmittedassignment=async(req,res)=>{
 }
 }
 
+//fetching uploaded assignments by teacher from database
 exports.submitassignment = async (req, res) => {
     try{
     const id=req.body.id;

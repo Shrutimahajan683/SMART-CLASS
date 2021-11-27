@@ -26,6 +26,7 @@ let transporter=nodemailer.createTransport({
     },
 })
 
+//sending otp to the user who entered username
 exports.send = async (req, res) => {
     try{
 const username=req.body.username;
@@ -69,6 +70,8 @@ res.status(200).send({  status:true,hash: fullHash, otp ,mssg:process.env.USERNA
     }
 }
 
+
+//verifying otp 
 exports.verify = async (req, res) => {
     try{
     const hash = req.body.hash;
@@ -94,6 +97,7 @@ exports.verify = async (req, res) => {
 }
 }
 
+//setting the account in verfied mode in database
 exports.verifygmail = async (req, res) => {
     try{
     console.log(req.body.username)
@@ -107,6 +111,7 @@ exports.verifygmail = async (req, res) => {
     }
 }
 
+//verfying username
 exports.otpverify = async (req, res) => {
     try{
     const username=req.body.username;

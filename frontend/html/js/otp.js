@@ -1,6 +1,7 @@
 if(!sessionStorage.getItem("username"))
 window.history.back()
 function call(){
+//verfiying otp
     fetch(`http://localhost:3000/otp/verify`, {
 method: "POST",
 body: JSON.stringify({
@@ -21,6 +22,7 @@ if(response.status==false)
 document.querySelector("#warning").innerHTML=response.message;
 else
 {
+
 fetch(`http://localhost:3000/otp/verifygmail`, {
 method: "POST",
 body: JSON.stringify({

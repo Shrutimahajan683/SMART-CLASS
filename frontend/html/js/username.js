@@ -2,6 +2,7 @@ sessionStorage.removeItem("hash")
     function call(){
         const username=document.querySelector('#username').value;
         sessionStorage.setItem("username",username);
+  //verifying username from backend that it is stored in database or user has signed up or not before sending otp request
         fetch(`http://localhost:3000/otp/otpverify`, {
   method: "POST",
   body: JSON.stringify({
@@ -17,6 +18,7 @@ sessionStorage.removeItem("hash")
   })
   .then(response => {
     if(response.status==true){
+//sending otp to the user
       fetch(`http://localhost:3000/otp/send`, {
   method: "POST",
   body: JSON.stringify({

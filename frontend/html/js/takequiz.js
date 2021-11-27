@@ -18,7 +18,9 @@ if(sessionStorage.getItem("role")!="student")
         }
     }
 }
-fetch(`http://localhost:3000/signin/quizresult`, {
+
+//getting practice quiz result (output) and displaying it
+fetch(`http://localhost:3000/quiz/quizresult`, {
         method: "POST",
         body: JSON.stringify({
           token,
@@ -50,8 +52,9 @@ fetch(`http://localhost:3000/signin/quizresult`, {
     }
 }
 
-     
-     fetch(`http://localhost:3000/signin/takequiz`, {
+
+//fetching the quiz from backend by sending data
+     fetch(`http://localhost:3000/quiz/takequiz`, {
         method: "POST",
         body: JSON.stringify({
           token,

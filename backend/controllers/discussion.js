@@ -12,6 +12,7 @@ const {
 } = require("../Reusable functions/ObjecttoArrayConverter");
 const { jwtVerifier } = require("../Reusable functions/jwtVerifier");
 
+//storing topic details for discussion in database
 exports.submittopic = async (req, res) => {
     try{
     console.log(req.body);
@@ -58,6 +59,7 @@ exports.submittopic = async (req, res) => {
     }
 }
 
+//fecting topic details from backend 
 exports.fetchtopics = async (req, res) => {
     try{
     const {
@@ -84,6 +86,7 @@ catch(err){
 }
 }
 
+//fetching posts from backend
 exports.fetchposts = async (req, res) => {
     try{
     const id=req.body.id;
@@ -97,6 +100,7 @@ exports.fetchposts = async (req, res) => {
     }
 }
 
+//storing posts of topics in backend
 exports.submitposts = async (req, res) => {
     try{
     const {

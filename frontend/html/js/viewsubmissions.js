@@ -2,6 +2,8 @@ if(sessionStorage.getItem("role")!="teacher")
 window.history.back()
  function call(id,name){
      const marks=document.querySelector("#marks").value
+  
+  //updating marks for student after entering marks by teacher
      fetch(`http://localhost:3000/anotherfeature/updatemarks`, {
   method: "POST",
   body: JSON.stringify({
@@ -23,6 +25,8 @@ document.querySelector("#var").innerHTML=`<label for="date" class="lmarks">Enter
 })
  }
   const assignment=sessionStorage.getItem("assignment")
+
+  //fetching assignments for teacher
  fetch(`http://localhost:3000/anotherfeature/fetchsubmissions`, {
 method: "POST",
 body: JSON.stringify({

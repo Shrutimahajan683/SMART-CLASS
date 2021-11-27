@@ -1,18 +1,22 @@
+//Anyone who want to access this UI will be redirected to the back UI expect any student of this website
 if(sessionStorage.getItem("role")!="student")
   window.history.back()
 const token=sessionStorage.getItem("token");
 const subject=sessionStorage.getItem("identity");
 function take(data){
+  //storing quizname in sessionstorage and redirecting it to takequiz UI
     sessionStorage.setItem("quizname",data)
     window.location.href = "/takequiz.html";
 }
 
 function view(data){
+  //storing quizname in sessionstorage and redirecting it to viewquiz UI
     sessionStorage.setItem("quizname",data)
     window.location.href = "/viewquiz.html";
 }
 
- fetch(`http://localhost:3000/signin/getquiz`, {
+//fetching all quizes data from backend 
+ fetch(`http://localhost:3000/quiz/getquiz`, {
         method: "POST",
         body: JSON.stringify({
           token,
@@ -24,7 +28,6 @@ function view(data){
         }
       })
         .then(response => {
-            console.log("hey")
           return response.json()
         })
         .then(response => {
@@ -32,6 +35,7 @@ function view(data){
           {
             let htmlCode = ``;
             const requests=response.data;
+      //If there is no quiz then display an empty dustbin by seeting innerhtml of division
             if(requests.length==0)
             {
                 document.querySelector("#substyle").innerHTML="NO PRACTICE QUIZ"
@@ -45,6 +49,7 @@ function view(data){
             container.innerHTML=htmlCode;
             }
             else{
+              //took quiz data from backend and diplayed all quizes
               requests.forEach(function(request) {
               htmlCode =
                 htmlCode +

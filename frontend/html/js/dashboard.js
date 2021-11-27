@@ -1,6 +1,7 @@
 if(sessionStorage.getItem("role")!="admin")
   window.history.back()
     function studentaccept(data){
+      //accepting student request for accessing website
         fetch(`http://localhost:3000/signin/studentaccept`, {
       method: "POST",
       body: JSON.stringify({
@@ -19,6 +20,7 @@ if(sessionStorage.getItem("role")!="admin")
       });
     }
     
+    //declining student request for accessing website
     function studentdecline(data){
         fetch(`http://localhost:3000/signin/studentdecline`, {
       method: "POST",
@@ -38,6 +40,7 @@ if(sessionStorage.getItem("role")!="admin")
       });
     }
 
+    //accepting teacher request for accessing website
     function teacheraccept(data){
         fetch(`http://localhost:3000/signin/teacheraccept`, {
       method: "POST",
@@ -57,6 +60,7 @@ if(sessionStorage.getItem("role")!="admin")
       });
     }
 
+    //declining teacher request for accessing website
     function teacherdecline(data){
         fetch(`http://localhost:3000/signin/teacherdecline`, {
       method: "POST",
@@ -76,6 +80,7 @@ if(sessionStorage.getItem("role")!="admin")
       });
     }
 
+    //fetching student requests for accessing website
     fetch(`http://localhost:3000/signin/studentrequests`)
         .then(response => {
           return response.json()
@@ -95,6 +100,7 @@ if(sessionStorage.getItem("role")!="admin")
             container.innerHTML=htmlCode;
             }
             else{
+              //rendering student requests for accessing website
                 for(let c=0;c<response.data.length;c++) {
               htmlCode =
                 htmlCode +
@@ -113,6 +119,8 @@ if(sessionStorage.getItem("role")!="admin")
           document.querySelector("#srequests").innerHTML=htmlCode
             }
 });
+
+ //fetching teacher requests for accessing website
 fetch(`http://localhost:3000/signin/teacherrequests`)
         .then(response => {
           return response.json()
@@ -132,6 +140,7 @@ fetch(`http://localhost:3000/signin/teacherrequests`)
             container.innerHTML=htmlCode;
             }
             else{
+    //rendering teacher requests for accessing website
                 for(let c=0;c<response.data.length;c++) {
               htmlCode =
                 htmlCode +

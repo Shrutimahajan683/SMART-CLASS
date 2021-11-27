@@ -8,6 +8,8 @@ if(sessionStorage.getItem("role")!="student"&&sessionStorage.getItem("role")!="t
       let sclass=0;
       if(role=="teacher")
       sclass=sessionStorage.getItem("identity");
+    
+//fetching topics from backend for discussion
     fetch(`http://localhost:3000/discussion/fetchtopics`, {
         method: "POST",
         body: JSON.stringify({
@@ -40,6 +42,7 @@ if(sessionStorage.getItem("role")!="student"&&sessionStorage.getItem("role")!="t
             container.innerHTML=htmlCode;
             }
             else{
+      //rendering topics
             for(let c=0;c<result.length;c++) {
       htmlCode =
         htmlCode +
@@ -47,7 +50,7 @@ if(sessionStorage.getItem("role")!="student"&&sessionStorage.getItem("role")!="t
         <li class="row dis">
                 <a href="posts.html" onclick='store("${result[c].id}")'>
                     <h4 class="title">
-                     ${result[c].title}
+                     <u>${result[c].title}</u>
                     </h4>
                     <h6 class="title">
                         ${result[c].description}
@@ -74,6 +77,8 @@ if(sessionStorage.getItem("role")!="student"&&sessionStorage.getItem("role")!="t
             alert("Enter Title");
             return;
         }
+      
+    //submitting topics by taking values from frontend to backend
         fetch(`http://localhost:3000/discussion/submittopic`, {
         method: "POST",
         body: JSON.stringify({

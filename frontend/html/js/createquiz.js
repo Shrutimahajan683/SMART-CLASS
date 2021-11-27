@@ -6,6 +6,8 @@ if(sessionStorage.getItem("role")!="teacher")
     let htmlCode = ``;
     document.querySelector("#hometext").innerHTML=quizname
     let obj={};
+
+    //taking quiz ui values filled by students while practicing and sending it to backend and then producing result
     function call(data) {
          for(let c=1;c<=count;c++){
              inobj={}
@@ -18,7 +20,7 @@ if(sessionStorage.getItem("role")!="teacher")
              inobj.r=document.querySelector("#r"+c).value;
              obj[c]=inobj;
         }
-        fetch(`http://localhost:3000/signin/createquiz`, {
+        fetch(`http://localhost:3000/quiz/createquiz`, {
       method: "POST",
       body: JSON.stringify({
         token:sessionStorage.getItem("token"),

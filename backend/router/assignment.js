@@ -1,4 +1,4 @@
-const otpcontroller = require("../controllers/feature")
+const otpcontroller = require("../controllers/assignment")
 const router = require("express").Router();
 router.post('/assignment', otpcontroller.assignment)
 router.post('/studentassignment', otpcontroller.studentassignment)

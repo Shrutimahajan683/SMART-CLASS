@@ -6,6 +6,8 @@ if(sessionStorage.getItem("role")!="student")
         }
         const token=sessionStorage.getItem("token");
         const subject=sessionStorage.getItem("identity")
+  
+  //fetching assignments for student
         fetch(`http://localhost:3000/anotherfeature/studentassignment`, {
   method: "POST",
   body: JSON.stringify({
@@ -38,6 +40,7 @@ if(sessionStorage.getItem("role")!="student")
             }
       else{
       for(let c=0;c<result.length;c++) {
+  //displaying assignments for student
       htmlCode =
         htmlCode +
         

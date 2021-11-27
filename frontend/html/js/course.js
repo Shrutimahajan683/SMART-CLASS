@@ -9,6 +9,8 @@ if(sessionStorage.getItem("role")!="student")
         function discussion(){
             window.location.href = "/discussion.html";
         }
+
+//taking class request from frontend and storing it to backend
 function request(){
     const time=document.querySelector("#timePicker").value;
     const token=sessionStorage.getItem("token");
@@ -49,7 +51,8 @@ function request(){
     alert("Select class timing in between 8 AM and 4 PM")
     return;
    } 
-    data = fetch(`http://localhost:3000/signin/request`, {
+   //request send to backend
+    data = fetch(`http://localhost:3000/classrequest/sendrequest`, {
         method: "POST",
         body: JSON.stringify({
           time,
@@ -81,7 +84,8 @@ function request(){
 
 function practicequiz(){
   console.log("hey")
-  fetch(`http://localhost:3000/signin/getquiz`, {
+  //fetching quizes from backend
+  fetch(`http://localhost:3000/quiz/getquiz`, {
         method: "POST",
         body: JSON.stringify({
           token:sessionStorage.getItem("token"),

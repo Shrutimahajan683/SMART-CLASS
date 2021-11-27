@@ -1,9 +1,12 @@
+//Anyone who want to access this UI will be redirected to the back UI expect any teacher of this website
 if(sessionStorage.getItem("role")!="teacher")
 window.history.back()
 sessionStorage.removeItem("assignment");
 function call(data){
 sessionStorage.setItem("assignment",data);
 }
+
+//end submission by sending id of assignment division to backend
 function updatevalid(id){
 fetch(`http://localhost:3000/anotherfeature/updatevalid`, {
   method: "POST",
@@ -23,6 +26,8 @@ console.log(response)
 alert("Ended submission")
 })
 }
+
+//form div
 const form = document.getElementById("form");
 
 form.addEventListener("submit", submitForm);
@@ -36,6 +41,7 @@ formData.append("name", name.value);
  for(let i =0; i < files.files.length; i++) {
      formData.append("files", files.files[i]);
 }
+//uploading assignment to backend
 fetch(`http://localhost:3000/feature/uploadassignment`, {
  method: 'post',
  body: formData,
@@ -79,6 +85,7 @@ fetch(`http://localhost:3000/image/${filename}`, {
  window.location.href = "/assignment.html";
 }
 
+//fetching assignments from backend
 fetch(`http://localhost:3000/anotherfeature/fetchassignments`, {
   method: "POST",
   body: JSON.stringify({
@@ -111,6 +118,7 @@ const container=document.querySelector("#assignments")
      }
 
 else{
+  //rendring assignments for teacher view
 for(let c=0;c<result.length;c++) {
 htmlCode =
  htmlCode +

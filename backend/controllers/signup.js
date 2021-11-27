@@ -10,6 +10,7 @@ const { insertQuery, selectQuery } = require("../Database/QueryCreater");
 const Upload=require("express-fileupload")
 app.use(Upload())
 
+//storing teacher detaisl in database
 exports.teacher = async (req, res) => {
   try{
   const {
@@ -47,6 +48,7 @@ exports.teacher = async (req, res) => {
 }
 }
 
+//storing students details in database
 exports.student = async (req, res) => {
   try{
   const {

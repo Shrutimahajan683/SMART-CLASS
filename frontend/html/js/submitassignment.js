@@ -1,6 +1,7 @@
 if(sessionStorage.getItem("role")!="student")
 window.history.back()
    const id=sessionStorage.getItem("assignment");
+//storing assignments to database
   fetch(`http://localhost:3000/anotherfeature/submitassignment`, {
 method: "POST",
 body: JSON.stringify({

@@ -5,7 +5,9 @@ window.history.back()
  const quizname=sessionStorage.getItem("quizname");
  let htmlCode=``;
 
- fetch(`http://localhost:3000/signin/viewquiz`, {
+
+//diplaying the right answers of the quiz
+ fetch(`http://localhost:3000/quiz/viewquiz`, {
     method: "POST",
     body: JSON.stringify({
       token,
