@@ -1,7 +1,7 @@
 
 # Smart Class
 
-A web application that gives students an array of digital academic and social tools to stay engaged with their studies, peers and broader university community during pandemic .
+A web application which gives students an array of digital academic and social tools to stay engaged with their studies, peers and broader university community during pandemic .
 
 
 ## Features
@@ -15,6 +15,13 @@ A web application that gives students an array of digital academic and social to
 - Discussion Forum
 - Logout
 
+# Technology Stack
+- HTML
+- CSS
+- JAVASCRIPT
+- NODEJS
+- EXPRESSJS
+- POSTGRESQL
 
 
 
@@ -27,21 +34,18 @@ Open visual studio and open this folder
   cd backend
   npm install
 ```
-Again open visual studio open html folder inside the frontend folder of the Smart Class folder
-Then go to signin.html file and click on Go Live from status bar
-
-Now the frontend setup is ready
-
-Now download pgadmin and make a database and give it name engage and restore the engage.sql file over there or click on tool option on menu bar and click on query tool option ,a window will be opened at right then run all engage.sql file queries over there 
-
-After that run-    insert into admin(full_name,username,password) values('Admin_name','Admin_gmail_id','password');
+- Again open visual studio open html folder inside the frontend folder of the Smart Class folder
+- Then go to signin.html file and click on Go Live from status bar
+- Now the frontend setup is ready
+- Now download pgadmin and make a database and give it name engage and restore the engage.sql file over there or click on tool option on menu bar .
+- Then click on query tool option ,a window will be opened at right then run all engage.sql file queries over there 
+- After that run- insert into admin(full_name,username,password) values('Admin_name','Admin_gmail_id','password');
 Query in query tool section for inserting admin data because i haven't made signup feature for admin. Hence you can make anyone as admin.
-
-Now you are done with backend setup
+- Now you are done with backend setup
 
 # Set the environment variables
 
-Make an .env file in backend folder and add following variables
+Make a .env file in backend folder and add following variables
 
 ```
 PRIVATEKEY=Engage   
