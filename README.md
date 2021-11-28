@@ -34,7 +34,7 @@ A web application which gives students an array of digital academic and social t
   cd backend
   npm install
 ```
-- Again open visual studio open html folder inside the frontend folder of the Smart Class folder
+- Open new window of visual studio open html folder inside the frontend folder of the Smart Class folder
 - Then go to signin.html file and click on Go Live from status bar
 - Now the frontend setup is ready
 - Now download pgadmin and make a database and give it name engage and restore the engage.sql file over there or click on tool option on menu bar .
