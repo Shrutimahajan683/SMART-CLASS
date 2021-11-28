@@ -102,7 +102,7 @@ Give password of the gmail account for GMAILID account to this variable
 # USE WEB APPLICATION
 
 
-Again go to terminal where you run npm install after running cd backend then run
+Again go to terminal where you ran npm install after running cd backend then run
 ```
 npm start
 ```
