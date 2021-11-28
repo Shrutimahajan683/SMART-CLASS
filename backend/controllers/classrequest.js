@@ -109,7 +109,7 @@ exports.acceptclassdata = async (req, res) => {
             from:process.env.GMAILID,
             to:getresult1.rows[i].username,
             subject:"Class Scheduled",
-            text:"Dear Student Your class of '+subject+' has been scheduled on "+date+" at "+time,
+            text:"Dear Student Your class of "+subject+"has been scheduled on "+date+" at "+time,
         }
         
         transporter.sendMail(mailoptions,function(err,success){

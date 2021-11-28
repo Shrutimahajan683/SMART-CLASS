@@ -41,7 +41,7 @@ function request(){
       var d = new Date();
       if(time<d.toLocaleString('en-GB'))
       {
-        alert("Select valid time")
+        alert("Select time after present time")
         return;
       }
     }

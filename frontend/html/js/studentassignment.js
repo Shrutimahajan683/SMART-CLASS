@@ -40,7 +40,7 @@ if(sessionStorage.getItem("role")!="student")
             }
       else{
       for(let c=0;c<result.length;c++) {
-  //displaying assignments for student
+  //displaying assignments for students
       htmlCode =
         htmlCode +
         
@@ -98,8 +98,8 @@ if(sessionStorage.getItem("role")!="student")
         `
                 <div class="row subm justify-content-center mt-6">
                   <h6 class="apath">Name- ${result[c].assignmentname}</h6>
-                <a href="${result[c].assignmentpath}" class="apath">Submitted Assignment</a>
-                <a href="${result[c].filepath}" class="apath">Assignment</a>
+                <a href="${result[c].filepath}" class="apath">Submitted Assignment</a>
+                <a href="${result[c].assignmentpath}" class="apath">Assignment</a>
                 <h6 class="apath">Marks- ${result[c].marks}</h6>
                 </div>
               `;
