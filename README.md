@@ -27,9 +27,9 @@ A web application which gives students an array of digital academic and social t
 
 ## Installation
 
-Clone this repository to your desktop
+- Clone this repository to your desktop
 
-Open visual studio and open this folder
+- Open visual studio and open this folder
 ```bash
   cd backend
   npm install
