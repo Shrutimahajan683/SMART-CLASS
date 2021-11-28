@@ -43,7 +43,8 @@ Now you are done with backend setup
 
 Make an .env file in backend folder and add following variables
 
-```PRIVATEKEY=Engage   
+```
+PRIVATEKEY=Engage   
 ```
 Assign any private key to it  but i gave it Engage(example)  
 
