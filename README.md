@@ -18,10 +18,10 @@ A web application which gives students an array of digital academic and social t
 # Technology Stack
 - HTML
 - CSS
-- JAVASCRIPT
-- NODEJS
-- EXPRESSJS
-- POSTGRESQL
+- Javascript
+- NodeJS
+- ExpressJS
+- PostgreSQL
 
 
 
